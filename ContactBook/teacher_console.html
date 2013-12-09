@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+	<style type = "text/css">
+	body{
+		background: #666;
+		margin:0;
+
+	}
+
+	body h2{
+		margin: 0;
+	}
+	.content{
+		position: relative;
+		background: #fff;
+		width: 80%;
+		
+		margin-top: 0;
+		margin-right: auto;
+		margin-left: auto;
+	}
+/*	article{
+		position: relative;
+		width: 100%;
+		}*/
+
+		aside{
+			background: #345;
+			position: absolute;
+			top:0;
+			right: 0;
+			width: 300px;
+			height: 100%;
+			margin-top: 0;
+			color:#FFD700;
+			overflow-x: hidden;
+			overflow-y: auto;
+			border-left: 2px solid #111;
+		}
+
+		aside h2{
+			padding: 10px;
+		}
+		aside #showbtn{
+			position: fixed;
+			width: 30px;
+			height: 100px;
+			top: 10px;
+			margin-left: -34px;
+			padding-top: 10px;
+			text-align: center;
+			border: 2px solid #111;
+			border-right: none;
+			background: #FFD700;
+			z-index: 3;
+			-webkit-user-select: none;
+			cursor: pointer;
+			color: #111;
+			font-size: 20px;
+			border-radius: 5px 0px 0px 5px;
+		}
+		aside #showbtn:hover{
+			top: 8px;
+			margin-left: -35px;
+			border: 4px solid #111;
+			border-right: none;
+			border-top: 2px solid #111;
+		}
+		aside #showbtn:active{
+			top: 10px;
+			margin-left: -34px;
+			border: 2px solid #111;
+			border-right: none;
+
+		}
+
+
+		.box_board{
+			width: 700px;
+			padding: 20px;
+			border: 2px solid #111;
+			margin:30px;
+		}
+
+		.box_board ul li.tit {
+			border-bottom: 0;
+			line-height: normal;
+			text-transform: uppercase;
+			font-size: 1.3em;
+			height: 30px;
+			background: none;
+		}
+
+		.box_board ul li {
+			min-height: 30px;
+			border-bottom: 1px solid #d5d7d6;
+			line-height: 30px;
+			overflow: hidden;
+			list-style-type:none;
+		}
+
+		.box_board ul li div {
+			float: left;
+			overflow: hidden;
+			margin: auto 0px;
+		}
+		.box_board ul li.add_btn {
+
+			border-bottom: none;
+			font-size: 2em;
+			margin-top: 10px;
+
+		}
+
+		.box_board ul li.add_btn #board_add_btn {
+			width: 20px;
+			border-radius: 50%;
+			border: 2px #444 dashed;
+			padding:0px 5px 0px 5px;
+			margin-right: auto;
+			margin-left: auto;
+			float:none;
+			cursor: pointer;
+		}
+
+		.box_board ul li.add_btn #board_add_btn:hover {
+			background: #EEC900;
+		}
+		.box_board ul li.add_btn #board_add_btn:active {
+			border: 2px #444 solid;
+			padding:0px 4px 0px 6px;
+		}
+
+
+		.box_board .number{
+			width: 10%;
+		}
+
+		.box_board .title{
+			width: 50%;
+		}
+		.box_board .tag{
+			width: 10%;
+		}
+		.box_board .date{
+			width: 20%;
+		}
+		.box_board .delete{
+			width: 5%;
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			line-height: 17px;
+			text-align: center;
+			margin-top: 7px;
+			font-size: .8em;
+			border: 1px solid #df6c4f;
+			-webkit-border-radius: 50%;
+			color:#df6c4f;
+		}
+		.box_board .delete:hover{
+			background-color: #df6c4f;
+			cursor: pointer;
+			color:#fff;
+		}
+
+
+
+
+		</style>
+		<link rel="stylesheet" href="css/board_timeline.css" type="text/css" media="screen">
+		<script src="jquery.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+		<script src="bootstrap/js/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap-editable/css/bootstrap-editable.css">
+		<script type="text/javascript" src="bootstrap-editable/js/bootstrap-editable.js"></script>
+
+
+
+		<script type="text/javascript" src="raphael-min.js"></script>
+		<script type="text/javascript">
+		$().ready(
+			function() {
+				$.fn.editable.defaults.mode = 'popup';
+				$(".box_board ul li:not(.tit) div.title").editable({
+					title: '輸入事項',
+
+				}
+
+				);
+
+				var editable
+
+				$(".box_board ul li:not(.tit) div.tag").editable({
+					type: "select",
+					title:"Select tag",
+					prepend:true,
+					showbuttons: false,
+					value: 1,    
+					source: [
+					{value: 1, text: '研究'},
+					{value: 2, text: '作業'},
+					{value: 3, text: '小考'},
+					{value: 2, text: '複習'},
+					]
+				});
+
+				$(".box_board ul li:not(.tit) div.date").editable({
+					type: "date",
+					showbuttons: false,
+					datepicker: {
+						todayBtn: 'linked'
+					} 
+				});  
+
+
+				$("#board_add_btn").click(
+					function() {
+						var selector_board_li = $(".box_board ul li:not(.tit):not(.add_btn)");
+						var li_size = $(".box_board ul li:not(.tit):not(.add_btn)").size();
+						console.log("項目數:"+li_size);
+
+						$(".box_board ul li:not(.tit):not(.add_btn):last").after("<li >"+
+							"<div class=\"number\">"+(li_size+1)+"</div>"+
+							"<div class=\"title\"></div>"+
+							"<div class=\"tag\"></div>"+
+							"<div class=\"date\"></div>"+
+							"<div class=\"delete\">X</div>"+
+							"</li>").next().find('.tag').editable({type: "select",title:"Select tag",prepend:true,showbuttons: false,value: 1,    
+							source: [{value: 1, text: '研究'},{value: 2, text: '作業'},{value: 3, text: '小考'},{value: 2, text: '複習'},]})
+							.end().find('.title:not(.tit)').editable({title: '輸入事項',})
+							.end().find('.date').editable({type: "date",showbuttons: false,datepicker: {todayBtn: 'linked'}});
+						}
+						);
+			}
+
+			);
+
+
+
+</script>
+</head>
+<body>
+	
+
+
+
+
+
+	<div class="content">
+		<article>
+			
+
+			<div class="box_board">
+				<h2>公告事項</h2>
+				<ul>
+					<li class="add_btn">
+						<div id="board_add_btn">+</div>
+					</li>
+					<br>
+					<li class="tit">
+						<div class="number">no</div>
+						<div class="title">title</div>
+						<div class="tag">tag</div>
+						<div class="date">date</div>
+					</li>
+					<li >
+						<div class="number">1</div>
+						<div class="title" data-type="text" data-title="輸入事項" >天氣好的晚上把一些小事拿出來牽掛
+						</div>
+						<div class="tag" data-type="select" data-value = "1"></div>
+						<div class="date">2013-08-09</div>
+						<div class="delete">X</div>
+					</li>
+					<li >
+						<div class="number">2</div>
+						<div class="title"></div>
+						<div class="tag"></div>
+						<div class="date"></div>
+						<div class="delete">X</div>
+					</li>
+					<li >
+						<div class="number">3</div>
+						<div class="title"></div>
+						<div class="tag"></div>
+						<div class="date"></div>
+						<div class="delete">X</div>
+					</li>
+					<li >
+						<div class="number">4</div>
+						<div class="title"></div>
+						<div class="tag"></div>
+						<div class="date"></div>
+						<div class="delete">X</div>
+					</li>
+					
+				</ul>
+			</div>
+
+
+		</article>
+		<article>
+			<div class="box_board">
+				<h2>訊息</h2>
+
+			</div>
+		</article>
+		<article>
+			<div class="box_board">
+				<h2>備忘</h2>
+			</div>
+		</article>
+		
+	</div>
+	<aside>
+		<div id="timelineContainer">
+			<h2>備忘錄</h2>
+			<div class="timelineToggle"><p><a class="expandAll">+ expand all</a></p></div>
+			<br class="clear">
+
+			<div class="timelineMajor">
+				<h2 class="timelineMajorMarker"><span>Today</span></h2>
+				<dl class="timelineMinor">
+					<dt id="event01" ><a>To Do List</a></dt>
+					<dd class="timelineEvent todolist" id="event01EX" style="display: none; ">
+						<p><img src="icon/todolist/paper20.png" alt="">繳交自然科報告心得</p>
+						<p><img src="icon/todolist/search20.png" alt="">研究jQuery</p>
+
+					</dd><!-- /.timelineEvent -->
+
+				</dl><!-- /.timelineMinor -->
+
+				<br class="clear">
+
+				<dl class="timelineMinor">
+					<dt id="event02"><a>教師備忘</a></dt>
+					<dd class="timelineEvent teacherlist" id="event02EX" style="display: none; ">
+						<p>改自然科小考的考卷</p>
+						<p>提醒同學戶外教學注意事項</p>
+					</dd><!-- /.timelineEvent -->
+				</dl><!-- /.timelineMinor -->
+			</div><!-- /.timelineMajor -->
+			<div class="timelineMajor">
+				<h2 class="timelineMajorMarker"><span>Tomorrow</span></h2>
+				<dl class="timelineMinor">
+					<dt id="event03"><a>To Do List</a></dt>
+					<dd class="timelineEvent todolist" id="event03EX" style="display: none; ">
+						<p><img src="icon/todolist/paper20.png" alt="">寫國文回家作業P12~p15</p>
+						<p><img src="icon/todolist/paper20.png" alt="">寫數學回家作業P22~p25</p>
+					</dd><!-- /.timelineEvent -->
+				</dl><!-- /.timelineMinor -->
+				<dl class="timelineMinor">
+					<dt id="event04"><a>教師備忘</a></dt>
+					<dd class="timelineEvent" id="event04EX" style="display: none; ">
+					</dd><!-- /.timelineEvent -->
+				</dl><!-- /.timelineMinor -->
+			</div><!-- /.timelineMajor -->
+
+			<div class="timelineMajor">
+				<h2 class="timelineMajorMarker"><span>Other</span></h2>
+				<dl class="timelineMinor">
+					<dt id="event05"><a>To Do List</a></dt>
+					<dd class="timelineEvent todolist" id="event05EX" style="display: none; ">
+						<p><img src="icon/todolist/paper20.png" alt="">08/20-數學小考ch.3</p>
+						<p><img src="icon/todolist/paper20.png" alt="">08/23-自然小考ch.2</p>
+					</dd><!-- /.timelineEvent -->
+				</dl><!-- /.timelineMinor -->
+				<dl class="timelineMinor">
+					<dt id="event06"><a>教師備忘</a></dt>
+					<dd class="timelineEvent" id="event06EX" style="display: none; ">
+						<p>08/15-Content about the other event123.</p>
+						<p>08/15-Content about the other event32.</p>
+						<p>08/16-Content about the other eventzzz.</p>
+						<p>09/15-Content about the other event444.</p>
+						<p>10/16-Content about the other event555.</p>
+					</dd><!-- /.timelineEvent -->
+				</dl><!-- /.timelineMinor -->
+			</div><!-- /.timelineMajor -->
+
+
+
+			<br class="clear">
+		</div><!-- /#timelineContainer -->
+
+
+
+		<div id="showbtn">►備忘錄</div>
+
+	</aside>
+	<script type="text/javascript">
+	var navstate= 1;
+	$("#showbtn").click(function() {
+		if(navstate==1){
+			$("aside").animate({right:"-300"});
+      //$("aside").hide();
+      $("#showbtn").html("◄備忘錄");
+      navstate = -(navstate);
+  }else if (navstate==-1){
+  	$("aside").animate({right:"0"});
+      //$("aside").show();
+      $("#showbtn").html("►備忘錄");
+      navstate = -(navstate);
+  }
+});
+	</script>
+	<script type="text/javascript" src="timeliner.min.js"></script>
+	<script>
+	$(document).ready(function() {
+		$.timeliner({
+			startOpen:['#event01EX', '#event02EX']
+		});
+			// Colorbox Modal
+			
+		});
+	</script>
+
+
+
+</body>
+</html>

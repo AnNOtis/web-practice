@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX TESTs</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript">
+	$().ready(
+	function() {
+		$.ajax({
+		    url: 'http://192.168.1.32:8080/iTS5/service/info/getClassInfo/SCE',
+		    error: function(xhr) {
+		      alert('Ajax request 發生錯誤');
+		      
+		    },
+		    success: function(response) {
+		    	debugger
+		      $('#msg').html(response);
+		      console.log(response);
+
+    		}
+  		});
+
+	}
+	);
+
+
+	</script>	
+</head>
+<body>
+	<div id="msg"></div>
+</body>
+</html>

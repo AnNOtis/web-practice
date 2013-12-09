@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body{
+
+	height:700px;
+	min-height: 100%;
+	height: auto;
+	margin:0px;
+
+	background: -webkit-radial-gradient(center, ellipse cover, #104E8B 0%,#4A708B 100%);
+}
+
+.SCENE {
+	-webkit-perspective: 500px;
+	position:relative;
+	width: 100%;
+	height: 400px;
+
+}
+.OBJECT {
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+	position: relative;
+	width: 500px;
+	height: 400px;
+	transition:0.5s;
+	margin:auto;
+
+}
+.FACE {
+	position: absolute;
+	top:175px;
+	left:150px;
+	height:200px;
+	width:200px;
+	opacity:0.9;
+	text-shadow: 0px 0px 15px rgba(255,255,255,0.7);
+	color:#fff;
+	text-align: center;
+	line-height: 200px;
+	font-size: 60px;
+	border-radius: 10px;
+}
+.FACE#d1 { -webkit-transform: translateZ(100px); }
+.FACE#d2 { -webkit-transform: translateZ(-100px) rotateY(180deg);}
+.FACE#d3 { -webkit-transform: translateX(100px) rotateY(90deg);}
+.FACE#d4 { -webkit-transform: translateX(-100px) rotateY(-90deg);}
+/*.FACE.im5 { -webkit-transform: translateY(150px) rotateX(90deg);}
+.FACE.im6 { -webkit-transform: translateY(-150px) rotateX(-90deg);}*/
+#d1{
+	background: #57A4F1;
+	font-size: 30px;
+}
+#d2{
+	background: #CC4646;
+	font-size: 30px;
+}
+#d3{
+	background: #FFD700;
+}
+#d4{
+	background: #9ACD32;
+	font-size: 30px;
+}
+
+.btn{
+	border:1px solid #111;
+
+	margin:3px;
+	width:50px;
+	text-align: center;
+	z-index: 50;
+
+}
+
+#right:hover{
+		border-radius: 50%;
+box-shadow:0px 0px 17px rgba(100%,100%,100%,0.5);
+	
+}
+#right:active{
+		border-radius: 50%;
+box-shadow:0px 0px 0px rgba(100%,100%,100%,0.5);
+	
+}
+#left:hover{
+		border-radius: 50%;
+box-shadow:0px 0px 17px rgba(100%,100%,100%,0.5);
+	
+}
+#left:active{
+		border-radius: 50%;
+box-shadow:0px 0px 0px rgba(100%,100%,100%,0.5);
+	
+}
+
+#pre{
+	background: #678;
+}
+#pre:hover{
+	background: #987;
+}
+#next{
+
+}
+#footer{
+	margin:auto;
+	width: 475px;
+	height: 100px;
+}
+#footer>img{
+	width:45px;
+	height:45px;
+	float:left;
+	margin:10px;
+}
+#title{
+	text-shadow: 0px 0px 30px rgba(255,255,255,0.7);
+	color:#fff;
+	width: 100%;
+	position:fixed;
+	top:50px;
+	font-size: 80px;
+	text-align: center;
+
+}
+#left{
+	position:absolute;
+	width:50px;
+	height:50px;
+	top: 260px;
+	left: 460px;
+	
+}
+
+#right{
+	position:absolute;
+	width:50px;
+	height:50px;
+	top: 260px;
+left: 850px;
+}
+
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="jquery-firefly-0.2.js"> </script>
+<script type="text/javascript">
+	$(function() {
+ $.firefly({
+		     images : ['fly2.png', '02.png'], //You can change images
+		     total : 65, // You can edit the number of flies
+		     on:"body"
+		 });
+
+// $(".OBJECT").hover(function() {
+// 	$(this).css("-webkit-transform","rotateY(360deg) rotateZ(0deg)");
+// },function() {
+// 	$(this).css("-webkit-transform","rotateY(0deg) rotateZ(0deg)");
+// });
+
+var temp = 0;
+var offset =90;
+$("#left").click(function() {
+	temp = temp+offset;
+	$(".OBJECT").css("-webkit-transform","rotateY("+temp+"deg)");
+});
+$("#right").click(function() {
+	temp = temp-offset;
+	$(".OBJECT").css("-webkit-transform","rotateY("+temp+"deg)");
+	
+});
+
+
+
+
+
+
+
+	});
+</script>
+</head>
+<body>
+	<div class="SCENE">
+		<div class="OBJECT">
+			<div class="FACE" id="d1">Entertainment</div>
+			<div class="FACE" id="d2">Clothing</div>
+			<div class="FACE" id="d3">Food</div>
+			<div class="FACE" id="d4">Transportation</div>
+		</div>
+		<img id="left" src="arrowleft.png">
+		<img id="right" src="arrowright.png">
+	</div>
+	X:<br>
+	<div class="btn" id="pre">pre</div>
+	<div class="btn" id="next">next</div>
+	<div id="footer">
+		<img src="1.ico">
+		<img src="2.ico">
+		<img src="3.ico">
+		<img src="4.ico">
+		<img src="5.ico">
+		<img src="6.ico">
+		<img src="7.ico">
+
+	</div>
+	<div id="title">LIFE Cloud</div>
+<script type="text/javascript">
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

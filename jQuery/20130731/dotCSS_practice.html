@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dotCSS_practice</title>
+	  <style type="text/css">
+  body {
+    
+    
+  }
+  .content{
+	margin:50px;
+
+
+
+  }
+
+#toolbar{
+	position: relative;
+	/*background: #444;*/
+	border-radius: 5px;
+	width: 120px;
+	text-align: center;
+	color: #fff;
+}
+
+#toolbar div{
+	
+	background: #456;
+	border-radius: 3px;
+	width: 30px;
+	height: 20px;
+margin: 15px;
+}
+
+
+
+#minor{
+	
+	width: 30px;
+
+}
+
+#plus{
+width: 30px;
+
+}
+
+  </style>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+
+  <script type="text/javascript">
+  $().ready(
+  	function() {
+  		var	$p = $("p");
+
+  		
+  		$("#minor").click(function() {
+  			
+  			var num = parseFloat($p.css("fontSize"),10);
+  			num/=1.4;
+$p.css("fontSize",num+"px");
+
+
+
+
+  		});
+
+$("#plus").click(function() {var num = parseFloat($p.css("fontSize"),10);
+  			num*=1.4;
+$p.css("fontSize",num+"px");});
+
+
+		
+
+
+
+
+
+
+  	}
+
+
+
+
+  	);
+
+
+
+  </script>
+</head>
+<body>
+	
+
+
+<div id="toolbar">
+	<div id="minor">-</div>
+	<div id="plus">+</div>
+</div>
+
+<div class="content">
+	
+<h1>Hello, I'm H1!!!!!
+	<h2>HEYHEY~ I'm H2</h2>
+	<p>Why</p>
+	<p>so</p>
+	<p>serious</p>
+
+	<h2>Marron5</h2>
+
+	<p>Give me</p>
+	<p>FIVE!!!!!</p>
+</h1>
+
+
+</div>
+
+
+
+
+</body>
+</html>

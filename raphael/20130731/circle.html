@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<style type="text/css">
+	body {
+		background-color: #fff;;
+	}
+	</style>
+	<script type="text/javascript" src="raphael-min.js"></script>
+	<script type="text/javascript">
+
+	</script>
+
+</head>
+<body>
+	<div id="animate-title"></div>
+	<div id="paper1"></div>
+	
+	<!-- a script that create's a paper and a rectangle -->
+	<script type="text/javascript">
+	var titletext = Raphael("animate-title",700,100),
+	attr = {font: "50px Helvetica", opacity: 0.5};;
+	titletext.text(350, 50, "It's Circle & Animate Test!").attr(attr) ;
+
+	var paper = Raphael("paper1", 700,700);
+
+
+
+	var circle = paper.circle(350,200,150).attr({
+		fill:"#fff",stroke:"#f00","stroke-width":6,
+	});
+	// var circle2 = circle.animate({fill:"#53868B",stroke:"#FFD700","stroke-width":90, "stroke-opacity": 0.3},3000);
+
+	// setTimeout(function(){circle2.animate({fill:"#FF6A6A",stroke:"#FFDAB9","stroke-width":30, "stroke-opacity": 0.7},3000,"elastic");}, 3100); 
+	// setTimeout(function(){circle2.animate({fill:"#FF6A6A","r":120,stroke:"#FFDAB9","stroke-width":90, "stroke-opacity": 0.7},3000);
+	// }, 6100); 
+
+
+var circle2 = circle.animate({fill:"#53868B",stroke:"#FFD700","stroke-width":90, "stroke-opacity": 0.3},1000,function(){circle2.animate({fill:"#FF6A6A",stroke:"#FFDAB9","stroke-width":30, "stroke-opacity": 0.7},1000,"elastic",function(){circle2.animate({fill:"#FF6A6A","r":120,stroke:"#FFDAB9","stroke-width":90, "stroke-opacity": 0.7},1000);
+	 });});
+
+	</script>
+
+
+</body>
+</html>

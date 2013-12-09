@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css">
+ body {
+ 	background-color: #fff;;
+ }
+</style>
+<script type="text/javascript" src="raphael-min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
+</head>
+<body>
+	<div id="animate-title"></div>
+<div id="paper1"></div>
+	<button type="button">Click Me!</button>	<!-- a script that create's a paper and a rectangle -->
+<script type="text/javascript">
+	var titletext = Raphael("animate-title",700,100),
+	attr = {font: "50px Helvetica", opacity: 0.5};;
+	titletext.text(350, 50, "It's Circle & Animate Test!").attr(attr) ;
+
+	var r = Raphael("paper1", 700,700);
+(function () {
+                    r.path("M20,240c0-20 40,-20 40,0c0,20 -40,20 -40,0z").attr(dashed);
+                    r.path("M120,240c0-20 40,20 40,0c0-20 -40,20 -40,0z").attr(dashed);
+                    var el = r.path("M20,240c0-20 40,-20 40,0c0,20 -40,20 -40,0z").attr({fill: "none", stroke: "#fff", "stroke-width": 2}),
+                        elattrs = [{path: "M120,240c0-20 40,20 40,0c0-20 -40,20 -40,0z"}, {path: "M20,240c0-20 40,-20 40,0c0,20 -40,20 -40,0z"}],
+                        now = 1;
+                    onclick = function () {
+                        el.stop().animate(elattrs[+(now = !now)], 1000);
+                    
+                })();
+</script>
+
+
+</body>
+	</html>

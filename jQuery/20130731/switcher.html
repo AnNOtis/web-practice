@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>selectorTest</title>
+	<style type="text/css">
+	.button{
+		float:left;
+		border: #111 1px solid;
+		margin: 10px;
+		padding: 10px;
+
+
+	}
+	body .large {
+		font-size: 1.5em;
+	}
+	.selected{
+		font-weight: bold;
+
+
+	}
+	.hidden{
+		display: none;
+
+	}
+
+	#switcher .hover{
+cursor: pointer;
+background-color: #afa;
+font-weight: bold;
+	}
+
+	</style>
+	<script src="../jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	$().ready(
+		function(){
+
+		$('#switcher .button').hover(
+			function() {
+				$(this).addClass('hover');
+			},
+			function() {
+				$(this).removeClass('hover');
+			}
+	);
+
+
+
+
+		});
+
+	</script>
+
+</head>
+<body>
+	<div id="switcher">
+		<h3>Style Switcher</h3>
+		<div class="button " >Default</div>
+		<div class="button" >Narrow Column</div>
+		<div class="button" >Large Print</div>
+	</div>
+
+
+</body>
+</html>

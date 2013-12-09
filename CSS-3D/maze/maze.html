@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body{
+
+	height:700px;
+	min-height: 100%;
+	height: auto;
+	margin:0px;
+	overflow:hidden;
+	background: -webkit-radial-gradient(center, ellipse cover, #104E8B 0%,#4A708B 100%);
+}
+
+.SCENE {
+	-webkit-perspective: 1450px;
+	position:relative;
+	width: 100%;
+	height: 400px;
+	zoom:1.5;
+
+}
+.OBJECT {
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform: rotateX(60deg) rotateY(0deg) rotateZ(-20deg);
+	/*-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);*/
+	position: relative;
+	width: 600px;
+	height: 400px;
+	transition:0.5s;
+	margin:auto;
+
+}
+.FACE {
+	position: absolute;
+	top:50px;
+	left:3px;
+	height:400px;
+	width:600px;
+	opacity:0.7;
+}
+
+
+#CUBEBOX{
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+	position: relative;
+	top:250px;
+	left:303px;
+	transition:0.5s;
+}
+.CUBE {
+	position: absolute;
+
+	height:21px;
+	width:21px;
+	opacity:0.7;
+	z-index: 5;
+}
+.FACE#dimg{ -webkit-transform:  rotateX(0deg);}
+.CUBE#d1 { -webkit-transform: translateZ(10px); }
+.CUBE#d2 { -webkit-transform: translateZ(-10px) rotateY(180deg);}
+.CUBE#d3 { -webkit-transform: translateX(10px) rotateY(90deg);}
+.CUBE#d4 { -webkit-transform: translateX(-10px) rotateY(-90deg);}
+.CUBE#d5 { -webkit-transform: translateY(10px) rotateX(90deg);}
+.CUBE#d6 { -webkit-transform: translateY(-10px) rotateX(-90deg);}
+#d1{
+	background: #57A4F1;
+	font-size: 30px;
+}
+#d2{
+	background: #CC4646;
+	font-size: 30px;
+}
+#d3{
+	background: #FFD700;
+}
+#d4{
+	background: #9ACD32;
+	font-size: 30px;
+}
+#d5{
+	background: #CE0029;
+
+}
+#d6{
+	background: #3E8E50;
+	font-size: 30px;
+}
+
+
+
+
+
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+
+</script>
+</head>
+<body>
+	<div class="SCENE">
+		<div class="OBJECT">
+			<img class="FACE" id = "dimg" src="map.jpg">
+
+			<div id="CUBEBOX">
+				<div class="CUBE" id="d1"></div>
+				<div class="CUBE" id="d2"></div>
+				<div class="CUBE" id="d3"></div>
+				<div class="CUBE" id="d4"></div>
+				<div class="CUBE" id="d5"></div>
+				<div class="CUBE" id="d6"></div>
+			</div>
+			
+		</div>
+		
+	</div>
+
+
+<script type="text/javascript">
+var temp = 0;
+var offset =90;
+$("body").keyup(function(e) {
+	var top = parseInt($("#CUBEBOX").css("top"));
+	console.log(top);
+	var left = parseInt($("#CUBEBOX").css("left"));
+	console.log(left);
+	if (e.keyCode == 37) { 
+		$("#CUBEBOX").css("left",(left-20)+"px");
+       //alert( "left pressed" );
+ 		temp = temp+offset;
+		// $("#CUBEBOX").css("-webkit-transform","rotateY("+temp+"deg)");
+    }else if(e.keyCode == 38){
+
+    	$("#CUBEBOX").css("top",(top-20));
+    	//alert( "up pressed" );
+    }else if(e.keyCode == 39){
+    	$("#CUBEBOX").css("left",(left+20));
+    	//alert( "right pressed" );
+    }else if(e.keyCode == 40){
+    	$("#CUBEBOX").css("top",(top+20));
+    	//alert( "down pressed" );
+    }
+
+});
+
+
+
+
+</script>
+
+</body>
+</html>

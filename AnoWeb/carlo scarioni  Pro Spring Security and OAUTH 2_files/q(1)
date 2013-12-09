@@ -1,0 +1,71 @@
+
+
+
+
+                                var amzn_wdgt={"cols":"1","tag":"carlscaronsof-20","width":"160","inner_bkgd_color":"#b3c1c8","serviceVersion":"20070822","head_text_color":"#eae493","marketPlace":"US","show_image":true,"price_color":"#3f3c39","rows":"3","templateId":"8001","title":"I Recommend","height":"600","curve_corners":true,"items":[{"asin":"0321584104","comment":[""]},{"asin":"0321349601","comment":[""]},{"asin":"0321356683","comment":[""]},{"asin":"1933988657","comment":[""]},{"asin":"0321503627","comment":[""]},{"asin":"1935182196","comment":[""]},{"asin":"0132350882","comment":[""]},{"asin":"0596007124","comment":[""]},{"asin":"1933988134","comment":[""]},{"asin":"1935182358","comment":[""]},{"asin":"1934356476","comment":[""]},{"asin":"1934356344","comment":[""]},{"asin":"1933988347","comment":[""]},{"asin":"1932394885","comment":[""]},{"asin":"1934356379","comment":[""]}],"outer_bkgd_color":"#4a6676","show_review":false,"sort_order":"Random","displayTemplate":"6","show_price":true,"text_color":"#31658b"}
+        amzn_wdgt.ID = "V20070822/US/carlscaronsof-20/8001/87425972-d58c-4631-8542-d58abd86ebf1";
+        amzn_wdgt.rt = "as_li_tf_mfw";
+        if (typeof _amzn_utils_strs == "undefined") { _amzn_utils_strs = {}; }; _amzn_utils_strs.getStringForUS = function(key){
+ var obj = new Object();        obj.Book = 'Book';
+        obj.Search = 'Search';
+        obj.Loading = 'Loading';
+        obj.LoyaltyPoints = 'Loyalty Points';
+        obj.GetEditWidgetShort = 'Get/Edit widget';
+        obj.Kindle = '';
+        obj.Unbox = 'Amazon Instant Video';
+        obj.GetEditWidgetLong = 'Get/Edit this widget';
+        obj.BestPrice = 'Best Price';
+        obj.Music = 'CD';
+        obj.NoItemsWishlist = 'No items in the Wish List';
+        obj.MP3 = 'MP3';
+        obj.Buy = 'Buy';
+        obj.Download = 'Download';
+        obj.closeString = 'Close window';
+        obj.or = 'or';
+        obj.NoResultsFor = 'No results for';
+        obj.SortBy = 'Sort by';
+        obj.Now = 'Now';
+        obj.GetWidgetLong = 'Get Widget';
+        obj.DVD = 'DVD';
+        obj.CustomerReviews = 'Reviews';
+        obj.PrivacyPolicy = 'Privacy';
+        obj.ErrorMessage = 'Could not connect to server. Please try later.';
+        obj.Price = 'Price';
+        obj.Searching = 'Searching';
+        obj.WatchNow = 'WatchNow';
+        obj.BuyNew = 'Buy New';
+        obj.Video = 'Video';
+        obj.selectStore = 'Select an Amazon store';
+        obj.Amazon = 'Amazon';
+        obj.CampaignID = '212361';
+        obj.AssocImpVIP = 'www.assoc-amazon.com';
+        obj.PandaAssocImpVIP = 'ir-na.amazon-adsystem.com';
+        obj.CompletionVIP = 'completion.amazon.com/search/complete';
+        obj.issMktid = '1';
+        obj.AmazonCom = 'Amazon.com';
+        obj.AmazonComLink = 'http://www.amazon.com/';
+        obj.PrivacyPolicyLink = 'http://rcm-na.amazon-adsystem.com/e/cm/privacy-policy.html?o=1';
+        obj.DefaultTag = 'widgetsamazon-20';
+        obj.WebsiteRefTag = 'assoc_wdgt_us';
+        obj.WSUrl = 'http://ws.amazon.com/widgets';
+        obj.PandaWSUrl = 'http://ws-na.amazon-adsystem.com/widgets';
+        obj.WMSUrl = 'http://wms.assoc-amazon.com';
+        obj.PandaWMSUrl = 'http://wms-na.amazon-adsystem.com';
+        obj.WebsiteUrl = 'http://widgets.amazon.com/';
+        obj.PrivacyPolicyLinkLength = '7';
+        obj.AmazonComLogoLength = '86';
+        obj.GetLinkButtonLengthDark = '70';
+        obj.GetLinkButtonLength = '82';
+        obj.GetLinkLength = '10';
+        obj.PrivacyAmazonComPermissableLength = '128';
+        obj.PrivacyGetLinkPermissableLength = '120';
+        obj.PrivacyGetLinkButtonPermissableLength = '125';
+        obj.PrivacyGetLinkButtonPermissableLengthDark = '115';
+        obj.LetterToPixelRatio = '6';
+if(obj[key]){ 
+return  obj[key]; }else { return 'Unknown string';
+    }
+}
+
+        document.write('<script charset="utf-8" type="text/javascript" src="http://wms.assoc-amazon.com/20070822/US/js/8001_6.js"> </script>');
+    

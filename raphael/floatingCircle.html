@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style type="text/css">
+  body {
+    
+    
+  }
+
+  #canvas{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 50px;
+    left:50px;
+    border: 1px solid #777;
+    background: #022146;
+
+  }
+  </style>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="raphael-min.js"></script>
+  <script type="text/javascript">
+  $(
+    function() {
+
+      var canvas = Raphael("canvas",500,500);
+      var bigcircle = canvas.circle(100,100,50,50).attr({
+        fill:"none","stroke-width":40,stroke:"#FCD703",opacity:0.7
+      });
+
+      bigcircle.hover(function() {
+        this.animate({opacity:1});
+      },function() {
+        this.animate({opacity:0.7});
+      });
+
+      bigcircle.click(function() {
+        this.stop().animate({opacity:1,r:25,"stroke-width":20},300,function() {
+          this.animate({r:50,"stroke-width":40},500,"elastic");
+canvas.circle(100,100,10,10).attr({fill:"#FCD703",stroke:"none","fill-opacity":0}).animate({cx:Math.floor((Math.random()*400+100)),cy:Math.floor((Math.random()*400+100)),"fill-opacity":0.8},1000,"<");
+canvas.circle(100,100,10,10).attr({fill:"#FCD703",stroke:"none","fill-opacity":0}).animate({cx:Math.floor((Math.random()*400+100)),cy:Math.floor((Math.random()*400+100)),"fill-opacity":0.8},1000,"<");
+canvas.circle(100,100,10,10).attr({fill:"#FCD703",stroke:"none","fill-opacity":0}).animate({cx:Math.floor((Math.random()*400+100)),cy:Math.floor((Math.random()*400+100)),"fill-opacity":0.8},1000,"<");
+canvas.circle(100,100,10,10).attr({fill:"#FCD703",stroke:"none","fill-opacity":0}).animate({cx:Math.floor((Math.random()*400+100)),cy:Math.floor((Math.random()*400+100)),"fill-opacity":0.8},1000,"<");
+        });
+
+
+      });
+
+
+    }
+
+
+
+
+
+    );
+  </script>
+
+</head>
+<body>
+  <div id="canvas"></div>
+  
+  
+  <script type="text/javascript">
+ 
+  </script>
+
+
+</body>
+</html>

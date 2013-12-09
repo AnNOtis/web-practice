@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style type="text/css">
+  body {
+    
+    
+  }
+  </style>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+ 
+  <script type="text/javascript">
+  $(function() {
+    $.get("http://www.kingnet.com.tw/joke/cgi/getJoke.html", 
+      function(result){
+    // console.log($(result)["content"]);
+    },"jsonp"
+
+    );
+  });
+  </script>
+
+</head>
+<body>
+  <div id="msg"></div>
+  
+  
+  <script type="text/javascript">
+ 
+  </script>
+
+
+</body>
+</html>

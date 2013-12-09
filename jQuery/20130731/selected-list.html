@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>selectorTest</title>
+	<script src="../jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	$().ready(function(){
+		$('#selected-plays>li').addClass('horizontal');
+		$('#selected-plays li:not(.horizontal)').addClass('sub-level');
+	});
+
+	</script>
+	<style type="text/css">
+	.horizontal{
+	float:left;
+	margin: 10px;
+	list-style: none;
+
+
+	}
+	.sub-level{
+		background: red;
+
+
+	}
+
+	</style>
+</head>
+<body>
+	<ul id="selected-plays">
+		<li>line1
+			<ul>
+				<li>YOYO</li>
+				<li>HAHA</li>
+			</ul>
+		</li>
+		<li>line2
+			<ul>
+				<li>GOGO</li>
+				<li>YUYU</li>
+			</ul>
+		</li>
+		<li>line3
+			<ul>
+				<li>WAKE</li>
+				<li>UPUP</li>
+			</ul>
+		</li>
+	</ul>
+
+
+</body>
+</html>

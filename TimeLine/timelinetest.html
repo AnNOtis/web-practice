@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen">
+<style type="text/css">
+	
+.container {
+width: 940px;
+margin-left: auto;
+margin-right: auto;
+padding: 10px;
+}
+div{
+	display: block;
+
+
+}
+
+</style>
+
+
+
+<script type="text/javascript">
+	function buttonClick(){
+		alert("My ClickListener!");
+	}
+</script>
+</head>
+<body>
+
+
+<div id="timelineContainer">
+
+	<br class="clear">
+
+    <div class="timelineMajor">
+        <h2 class="timelineMajorMarker"><span>今天</span></h2>
+        <dl class="timelineMinor">
+            <dt id="event01"><a>Event</a></dt>
+            <dd class="timelineEvent" id="event01EX" style="display: none; ">
+                <p>Content about the event goes here.</p>
+                
+            </dd><!-- /.timelineEvent -->
+        </dl><!-- /.timelineMinor -->
+
+        <br class="clear">
+
+        <dl class="timelineMinor">
+            <dt id="event02"><a>Another Event</a></dt>
+            <dd class="timelineEvent" id="event02EX" style="display: none; ">
+                <p>Content about the other event.</p>
+            </dd><!-- /.timelineEvent -->
+        </dl><!-- /.timelineMinor -->
+    </div><!-- /.timelineMajor -->
+        <div class="timelineMajor">
+        <h2 class="timelineMajorMarker"><span>明天</span></h2>
+        <dl class="timelineMinor">
+            <dt id="event01"><a>Event</a></dt>
+            <dd class="timelineEvent" id="event01EX" style="display: none; ">
+                <p>Content about the event goes here.</p>
+            </dd><!-- /.timelineEvent -->
+        </dl><!-- /.timelineMinor -->
+        <dl class="timelineMinor">
+            <dt id="event02"><a>Another Event</a></dt>
+            <dd class="timelineEvent" id="event02EX" style="display: none; ">
+                <p>Content about the other event.</p>
+            </dd><!-- /.timelineEvent -->
+        </dl><!-- /.timelineMinor -->
+    </div><!-- /.timelineMajor -->
+    <div class="timelineMajor">
+				<h2 class="timelineMajorMarker"><span>1964</span></h2>
+
+				<dl class="timelineMinor">
+					<dt id="19640702"><a>Civil Rights Act</a></dt>
+					<dd class="timelineEvent" id="19640702EX" style="display:none;">
+						<h3>July 2, 1964</h3>
+						<p>
+							President Lyndon B. Johnson signs the Civil Rights Act of 1964, mandating equal opportunity employment, and complete desegregation of schools and other public facilities. It also outlaws unequal voter registration requirements.<sup>13</sup> Although it would take years for these changes to take effect in communities around the country, the law is a monumental victory for the civil rights movement.</p>
+
+							<br class="clear">
+					</dd><!-- /.timelineEvent -->
+				</dl><!-- /.timelineMinor -->
+
+				<dl class="timelineMinor">
+					<dt id="19641014"><a>Nobel Peace Prize</a></dt>
+					<dd class="timelineEvent" id="19641014EX" style="display:none;">
+						<h3>October 14, 1964</h3>
+						<p>Martin Luther King Jr. is awarded the Nobel Peace Prize; at 35, he is the youngest recipient.</p>
+						<br class="clear">
+					</dd><!-- /.timelineEvent -->
+				</dl><!-- /.timelineMinor -->
+
+			</div><!-- /.timelineMajor -->
+			<br class="clear">
+</div><!-- /#timelineContainer -->
+
+
+
+<!-- GLOBAL CORE SCRIPTS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="inc/colorbox.js"></script>
+
+	<script type="text/javascript" src="timeliner.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.timeliner({
+    timelineContainer: '#timelineContainer', // value: selector of the main element holding the timeline's content, default to #timelineContainer
+    startState: 'closed', // value: closed | open, default to closed; determines whether the timeline is initially collapsed or fully expanded
+    startOpen: ["event01"], // value: array of IDs of single timelineEvents, default to empty; determines the minor event that you want to display open by default on page load
+    baseSpeed: 200, // value: any integer, default to 200; determines the base speed, some animations are a multiple (4x) of the base speed
+    speed: 4, // value: numeric, defalut to 4; a multiplier applied to the base speed that sets the speed at which an event's conents are displayed and hidden
+    fontOpen: '1.2em', // value: any valid CSS font-size value, defaults to 1em; sets the font size of an event after it is opened
+    fontClosed: '1em', // value: any valid CSS font-size value, defaults to 1em; sets the font size of an event after it is closed
+    expandAllText: '+ expand all', // value: string; defaults to '+ expand all'
+    collapseAllText: '- collapse all' // value: string; defaults to '- collapse all'
+});
+			// Colorbox Modal
+			// $(".CBmodal").colorbox({inline:true, initialWidth:100, maxWidth:682, initialHeight:100, transition:"elastic",speed:750});
+		});
+	</script>
+
+</body>
+</html>

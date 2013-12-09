@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body{
+	min-height: 100%;
+	height: auto;
+	margin:0px;
+
+	background: -webkit-radial-gradient(center, ellipse cover, #6a7210 0%,#1f3b08 100%);
+
+}
+#wrapper{
+	min-height: 900px;
+	height: auto;
+}
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="jquery-firefly-0.2.js"> </script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		 $.firefly({
+		     images : ['fly2.png', '02.png'], //You can change images
+		     total : 65, // You can edit the number of flies
+		     on:"body"
+		 });
+});
+</script>
+</head>
+<body>
+
+<div id="wrapper"></div>
+
+</body>
+</html>

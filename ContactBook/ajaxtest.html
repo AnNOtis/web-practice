@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style type="text/css">
+
+  </style>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="raphael-min.js"></script>
+
+  <script type="text/javascript" charset="UTF-8">
+  $(
+function() {
+
+var count = 0;
+      $('#btn').click(function (){
+        setInterval(
+          function() {$.ajax({
+           url: 'http://localhost:8080/chat_room/ajaxtest?',
+           cache: false,
+           dataType: 'text',
+               type:'GET',
+           data: {user:count,x:"x",y:"y"},
+           error: function(xhr) {
+             alert('Ajax request ERROR');
+           },
+           success: function(response) {
+                     $('#msg').append(response+"<br>");
+                     count++;
+                      },
+                     
+          })
+  },1000);}
+
+
+          );
+
+         
+
+
+
+}
+
+
+    
+
+
+
+    );
+
+</script>
+
+
+</head>
+<body>
+<div id="btn">click!</div>
+<div id="msg">message:</div>
+</body>
+</html>

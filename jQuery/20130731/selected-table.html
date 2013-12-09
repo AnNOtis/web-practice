@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>selected-table</title>
+	<script type="text/javascript" src="../jquery.js"></script>
+	<style type="text/css">
+	tr{
+		background:#fff;
+
+	}
+	.alt{
+		background: #ccc;
+
+
+	}
+	</style>
+	<script type="text/javascript">
+		$().ready(
+			function(){
+				$('tr:odd').addClass('alt');
+
+
+			}
+
+			);
+
+	</script>
+</head>
+<body>
+
+	<table>
+		<tr>
+			<td>123</td>
+			<td>123</td>
+		</tr>
+		<tr>
+			<td>23</td>
+			<td>333</td>
+		</tr>
+		<tr>
+			<td>1252</td>
+			<td>555</td>
+		</tr>
+	</table>
+	
+</body>
+</html>

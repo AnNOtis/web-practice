@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Schedule TEST</title>
+	<style>
+	body{
+		font-family:"Microsoft YaHei","Microsoft JhengHei";
+
+
+	}
+
+	aside{
+		position: fixed;
+		top:0;
+		right:0;
+		width: 300px;
+		background: #95A6F9;
+		height:1000px;
+		border-left: 2px solid #111;
+	}
+
+	aside h2{
+		border-bottom: 1px #111 solid;
+	}
+	aside .draggable{
+		height:30px;
+		width: 100px;
+		text-align: center;
+		border: 1px #111 solid;
+		margin-top: 5px;
+		margin-left: 5px;
+		list-style: none;
+		line-height: 30px;
+	}
+	aside .draggable:hover{
+		background: #062468;
+		color:#fff;
+	}
+
+	aside .draggable-helper{
+		height:30px;
+		width: 50px;
+		text-align: center;
+		background: #F3D921;
+
+	}
+
+
+
+
+	#schedule-content{
+		position:absolute;
+		top:50px;
+		margin-left:100px;
+	}
+	.schedule-column{
+		float:left;
+		width: 100px;
+	}
+
+	.schedule-row{
+		
+		height: 50px;
+		border: #111 solid 1px;
+		background: #FCE8A9;
+		line-height: 50px;
+		text-align: center;
+	}
+	.schedule-row-active{
+		
+
+		background: #F5BB0A;
+
+	}
+	
+	.schedule-row-hover{
+		background: #FE6C01;
+	}
+
+
+	.row-title{
+		height: 80px;
+		background: none;
+		border-top: none;
+	}
+	.row-mid{
+		height: 30px;
+		background: #777;
+		line-height: 30px;
+	}
+
+	.schedule-timeline{
+		background: none;
+		width: 150px;
+		
+	}
+	.schedule-timeline>div{
+		border-left: none;
+		background: none;
+	}
+
+
+
+
+	</style>
+	<script src="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+	<script>
+	$(function() {
+    // $( ".draggable" ).draggable();
+    var sound1 = document.getElementById("sound1");
+    var sound2 = document.getElementById("sound2");
+    
+    $( ".draggable" ).draggable({
+    	cursor: "move",
+    	cursorAt: { top: 20, left: 20 },
+    	helper: "clone"
+    });
+
+    $( ".schedule-row" ).each(
+    	function() {
+    		$(this).droppable({
+    			accept:".draggable",
+    			hoverClass: "schedule-row-hover",
+    			drop: function( event, ui ) {
+    				sound2.play();
+    				$( this ).addClass( "schedule-row-active" ).html(ui.draggable.text());
+    			}
+    		});
+    		$(this).bind('contextmenu',function(){
+    			return false;
+    		});
+
+    		$(this).mousedown(function(event) {
+
+    			switch (event.which) {
+    				case 3:
+    				sound1.play();
+    				sound1.play();
+    				$( this ).empty().removeClass("schedule-row-active").addClass("schedule-row")
+    				break;
+    				default:
+    				
+    			}
+    		});
+
+    	});
+
+
+});
+	</script>
+</head>
+<body>
+	<audio controls	id = "sound1" src="oh.wav"></audio>
+	<audio controls id = "sound2" src="cheer.wav"></audio>
+	<div id="schedule-content">
+		<div class="schedule-column schedule-timeline">
+			<div class="schedule-row row-title"></div>
+			<div class="schedule-row row1">08:10~09:00</div>
+			<div class="schedule-row row2">09:10~10:00</div>
+			<div class="schedule-row row3">10:10~11:00</div>
+			<div class="schedule-row row4">11:10~12:00</div>
+			<div class="schedule-row row-mid">~午休時間~</div>
+			<div class="schedule-row row5">13:30~14:20</div>
+			<div class="schedule-row row6">14:30~15:20</div>
+			<div class="schedule-row row7">15:30~16:20</div>
+			<div class="schedule-row row8">16:30~17:20</div>
+			<div class="schedule-row row9">下課囉</div>
+		</div>
+		
+		
+		<div class="schedule-column">
+			<div class="schedule-row row-title">禮拜一</div>
+			<div class="schedule-row row1"></div>
+			<div class="schedule-row row2"></div>
+			<div class="schedule-row row3"></div>
+			<div class="schedule-row row4"></div>
+			<div class="schedule-row row-mid"></div>
+			<div class="schedule-row row5"></div>
+			<div class="schedule-row row6"></div>
+			<div class="schedule-row row7"></div>
+			<div class="schedule-row row8"></div>
+			<div class="schedule-row row9"></div>
+		</div>
+		<div class="schedule-column">
+			<div class="schedule-row row-title">禮拜二</div>
+			<div class="schedule-row row1"></div>
+			<div class="schedule-row row2"></div>
+			<div class="schedule-row row3"></div>
+			<div class="schedule-row row4"></div>
+			<div class="schedule-row row-mid"></div>
+			<div class="schedule-row row5"></div>
+			<div class="schedule-row row6"></div>
+			<div class="schedule-row row7"></div>
+			<div class="schedule-row row8"></div>
+			<div class="schedule-row row9"></div>
+		</div>
+
+		<div class="schedule-column">
+			<div class="schedule-row row-title">禮拜三</div>
+			<div class="schedule-row row1"></div>
+			<div class="schedule-row row2"></div>
+			<div class="schedule-row row3"></div>
+			<div class="schedule-row row4"></div>
+			<div class="schedule-row row-mid"></div>
+			<div class="schedule-row row5"></div>
+			<div class="schedule-row row6"></div>
+			<div class="schedule-row row7"></div>
+			<div class="schedule-row row8"></div>
+			<div class="schedule-row row9"></div>
+		</div>
+
+		<div class="schedule-column">
+			<div class="schedule-row row-title">禮拜四</div>
+			<div class="schedule-row row1"></div>
+			<div class="schedule-row row2"></div>
+			<div class="schedule-row row3"></div>
+			<div class="schedule-row row4"></div>
+			<div class="schedule-row row-mid"></div>
+			<div class="schedule-row row5"></div>
+			<div class="schedule-row row6"></div>
+			<div class="schedule-row row7"></div>
+			<div class="schedule-row row8"></div>
+			<div class="schedule-row row9"></div>
+		</div>
+
+		<div class="schedule-column">
+			<div class="schedule-row row-title">禮拜五</div>
+			<div class="schedule-row row1"></div>
+			<div class="schedule-row row2"></div>
+			<div class="schedule-row row3"></div>
+			<div class="schedule-row row4"></div>
+			<div class="schedule-row row-mid"></div>
+			<div class="schedule-row row5"></div>
+			<div class="schedule-row row6"></div>
+			<div class="schedule-row row7"></div>
+			<div class="schedule-row row8"></div>
+			<div class="schedule-row row9"></div>
+		</div>
+
+
+
+
+
+
+	</div>
+	
+	
+	<aside>
+		
+		<ul><h2>國小</h2>
+			<li class = "draggable">數學</li>
+			<li class = "draggable">自然</li>
+			<li class = "draggable">國語</li>
+		</ul>
+		<ul><h2>國中</h2>
+			<li class = "draggable">高級數學</li>
+			<li class = "draggable">電腦</li>
+			<li class = "draggable">CS</li>
+		</ul>
+		<ul><h2>高中</h2>
+			<li class = "draggable">勞動服務</li>
+			<li class = "draggable">志工學習</li>
+			<li class = "draggable">翹課</li>
+		</ul>
+
+	</aside>
+
+	
+
+
+
+
+</body>
+</html>

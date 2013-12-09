@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body {font-family:arial, sans-serif;
+
+margin:0;
+}
+
+span{
+    font-size: 10px;
+}
+</style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.awesomeCloud.js"></script>
+    <script type="text/javascript" src="schooldata.js"></script>
+
+</head>
+
+<body>
+
+<div id="wordcloud" style="border:1px solid #f00;height:500px;width:1000px;">
+<!--     <span data-weight="55">word</span>
+<span data-weight="15">another</span>
+ <span data-weight="25">things</span> 
+    <span data-weight="35">super</span>
+    <span data-weight="5">cloud</span> -->
+</div>
+
+
+
+<div id="msg">123</div>
+</body>
+<script>
+    function rnd_snd() {
+        var temp_snd = ((Math.random()*2-1)+(Math.random()-1)+(Math.random()-1)+(Math.random()*2-1)+1)/3;
+
+        return temp_snd;
+
+    }
+    function rnd(mean, stdev) {
+        return Math.round(rnd_snd()*stdev+mean);
+    }
+    var count = 0;
+    var total = 0;
+    var L = 0;
+    var M=0;
+    var S=0;
+        $.each(schooldata, function(index,item){
+            $("#msg").append(item.school_name+"<br>");
+            var temp = rnd(25,25);
+            count++;
+                    console.log(temp);
+                    total+=temp;
+                    if(temp>30){
+                        L++;
+                    }else if(temp>20){
+                        M++;
+                    }else{
+                        S++;
+                    } 
+                    $("#wordcloud").append("<span data-weight=\""+temp+"\">"+item.school_name+"</span>");
+        });
+
+        console.log("Mean: "+total/count+",L:"+L+",M:"+M+",S:"+S);
+    var settings = {
+        "size" : {
+            "grid" : 5,
+            "factor" : 0,
+            "normalize" : true
+        },
+        // "color" : {
+        //     "background" : "rgba(255,255,255,0)", // background color, transparent by default
+        //     "start" : "#20f", // color of the smallest font, if options.color = "gradient""
+        //     "end" : "rgb(200,0,0)" // color of the largest font, if options.color = "gradient"
+        // },
+        "options" : {
+            "rotationRatio" : 0.3,
+            "color" : "random-light",
+            "printMultiplier" : 1
+        },
+        "font" : "Microsoft YaHei, Helvetica, sans-serif",
+        "shape" : "circle"
+    }
+    $( "#wordcloud" ).awesomeCloud( settings );
+</script>
+</html>

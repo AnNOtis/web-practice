@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+.panning {
+	width: auto;
+	height: 300px;
+	background: url('clouds.jpg');
+}
+
+.sprite {
+	width: 50px;
+	height: 50px;
+	background: url('mario.png');
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="jquery.motio.min.js"> </script>
+<script type="text/javascript">
+$(function() {
+	// Panning
+var panning = new Motio(document.getElementById('panning'), {
+	fps: 30, // Frames per second. More fps = higher CPU load.
+	speedX: -30 // Negative horizontal speed = panning to left.
+});
+panning.play(); // Start playing animation
+
+// Sprite
+var sprite = new Motio(document.getElementById('sprite'), {
+	fps: 3, // Frames per second. More fps = higher CPU load.
+	frames: 5 // Number of animation frames in sprite
+});
+sprite.play(); // Start playing animation
+
+
+
+});
+
+</script>
+</head>
+<body>
+
+<div id="panning" class="panning">123</div>
+<div id="sprite" class="sprite"><br><br><br><br></div>
+
+</body>
+</html>

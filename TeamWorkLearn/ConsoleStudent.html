@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body{
+
+	margin:0px;
+	background: radial-gradient(ellipse at center, #008ec2 0%, #016d9e 68%, #003e5f 100%);
+	overflow: hidden;
+	background-repeat: no-repeat; 
+	height:1000px;
+}
+
+#scoreboard{
+	position:relative;
+	/*width: 600px;*/
+	height:600px;
+	top:30px;
+}
+.glassmask{
+	position: absolute;
+	   border: 1px solid rgba(0,0,0,0.5);
+   border-radius: 10px 10px 2px 2px;
+   background: rgba(100,100,100,0.25);
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+
+	 width: 30px;
+   height: 100%;
+   margin-left: 20px;
+   margin-right: 20px;
+   z-index: 3;
+}
+
+#gm1{
+margin-left: 20px;
+}
+#gm2{
+	margin-left: 92px;
+}
+#gm3{
+	margin-left: 164px;
+}
+
+.glassbox{
+	position:relative;
+	float:left;
+	 width: 30px;
+   height: 100%;
+   margin-left: 20px;
+   margin-right: 20px;
+   padding: 0;
+   border: 1px solid rgba(0,0,0,0.5);
+   border-radius: 10px 10px 2px 2px;
+   -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+   
+}
+
+.score{
+	position:relative;
+	box-sizing: border-box;
+	width:100%;
+	border-top: 1px solid #aaa;
+	height:10%;
+	
+	background: #fff;
+	transition:1s;
+	z-index: 1;
+}
+.s10{
+	border-top: none;
+	 border-radius: 10px 10px 0px 0px;
+}
+.s1{
+	 border-radius: 0px 0px 2px 2px;
+}
+.centerline{
+	position:absolute;
+	width:100%;
+	height:1px;
+	top:50%;
+	border-top:2px solid #52ABCE; 
+}
+
+.horizontalcenter{
+	position: relative;
+margin-left: 100px;
+height: 100%;
+width: 216px;
+}
+
+#submitform{
+	position:absolute;
+/*	background: #345;*/
+/*	height:100px;*/
+	width: 1200px;
+	left: 400px;
+	margin-top:30px;
+	font: bolder 25px/30px Arial,Helvetica,sans-serif,Microsoft YaHei;
+}
+
+#battlefield{
+	position:absolute;
+	height:100px;
+	width: 800px;
+	left: 400px;
+	margin-top:-270px;
+text-align: center;
+	font: bolder 45px/80px Arial,Helvetica,sans-serif,Microsoft YaHei;
+}
+
+#battlefield-team{
+	width:100%;
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FFD700, 0 0 70px #FFD700, 0 0 80px #FFD700, 0 0 100px #FFD700, 0 0 150px #FFD700;
+	z-index: 3;
+}
+#battlefield-website{
+/*	text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;*/
+	width:100%;
+	z-index: 2;
+	font-size: 30px;
+}
+
+#battlefield-website #subfield{
+/*	text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;*/
+	font-size: 50px;
+	margin-left: 15px;
+	color: #fff;
+	text-shadow: 0 1px 0 #ccc, 
+
+               0 2px 0 #c9c9c9,
+
+               0 3px 0 #bbb,
+
+               0 4px 0 #b9b9b9,
+
+               0 5px 0 #aaa,
+
+               0 6px 1px rgba(0,0,0,.1),
+
+               0 0 5px rgba(0,0,0,.1),
+
+               0 1px 3px rgba(0,0,0,.3),
+
+               0 3px 5px rgba(0,0,0,.2),
+
+               0 5px 10px rgba(0,0,0,.25),
+
+               0 10px 10px rgba(0,0,0,.2),
+
+               0 20px 20px rgba(0,0,0,.15);
+	
+}
+
+
+#battlefield-news{
+/*	text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;*/
+	width:100%;
+	z-index: 1;
+	letter-spacing:12px;
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+}
+
+#baseinfobox{
+	position:absolute;
+	
+}
+#descrptionbox{
+	position:absolute;
+	left:200px;
+}
+
+#submitbox{
+	position:absolute;
+	margin-top: 220px;
+	width:800px;
+	background: #345;
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	-webkit-border-radius: 5px;
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	padding: 5px 10px 6px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	transition:0.3s;
+}
+#submitbox:hover{
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5),0 0px 30px rgba(255,255,255,0.7);
+}
+
+#filebox{
+	position:absolute;
+	left:600px;
+	z-index: 60;
+}
+
+#fileimg{
+	position:absolute;
+	left:600px;
+	width:200px;
+	height:200px;
+	border:2px dashed #f5da3f;
+	border-radius: 4px;
+}
+
+form{
+	color: #000;
+	
+}
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+ function submitfunction() {
+
+$("#submitform").submit();
+
+
+ }
+
+$("document").ready(function(){
+  var filedata="";
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+      
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+
+          filedata = e.target.result;
+          console.log(filedata);
+          $("#fileimg").attr("src",filedata);
+          // span.innerHTML = ['<img class="thumb" src="', e.target.result,
+          //                   '" title="', escape(theFile.name), '"/>'].join('');
+          // document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+ document.getElementById('filebox').addEventListener('change', handleFileSelect, false);
+
+
+ $("#submitform").submit(function(e)
+{
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+	console.log(postData);
+    $.ajax(
+    {
+        url : formURL,
+        type: "POST",
+        data : postData,
+        success:function(data, textStatus, jqXHR) 
+        {
+            //data: return data from server
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+            //if fails      
+			alert("AJAX FAIL");
+        }
+    });
+    e.preventDefault(); //STOP default action
+});
+
+
+});
+</script>
+</head>
+<body>
+<div id="scoreboard">
+	<div class="centerline">
+		<form id="submitform" action="../submit" method="post">
+			<span id = "baseinfobox">
+
+				隊伍：第一組<br />
+				<input type="hidden" name="team" value="1"required />
+
+				<p>
+				網頁名稱：<br />
+				<input type="text" name="web_name" required />
+				</p>
+				<p>
+				網址：<br />
+				<input type="url" name="web_url" />
+				</p>
+
+			</span>
+
+			<span id = "descrptionbox">
+
+					為什麼這網站需要SSO?：<br />
+					<textarea name="description" rows="10" cols="40"></textarea>
+
+			</span>
+<!-- 			<input id="filebox" type="file" id="uploadimgbtn"> -->
+			
+			<output id="list">
+				<input type="file" id="filebox" name="files[]"/>
+				<img id = "fileimg" src="">
+			</output>
+			<button id="submitbox" onclick="submitfunction()">提交</button>
+		</form>
+		<div id = "battlefield">
+			<div id="battlefield-team">第一組</div>
+			<div id="battlefield-website">用 <span id="subfield">Google</span> </div>
+			<div id="battlefield-news">先馳得點</div>
+
+		</div>
+
+	</div>
+	<div class="horizontalcenter">
+		<div id="gm1" class="glassmask"></div>
+		<div id = "g1" class = "glassbox">
+
+			<div class="score s10"></div>
+			<div class="score s9"></div>
+			<div class="score s8"></div>
+			<div class="score s7"></div>
+			<div class="score s6"></div>
+			<div class="score s5"></div>
+			<div class="score s4"></div>
+			<div class="score s3"></div>
+			<div class="score s2"></div>
+			<div class="score s1"></div>
+		</div>
+		<div  id="gm2"  class="glassmask"></div>
+		<div id = "g2" class = "glassbox">
+			<div class="score s10"></div>
+			<div class="score s9"></div>
+			<div class="score s8"></div>
+			<div class="score s7"></div>
+			<div class="score s6"></div>
+			<div class="score s5"></div>
+			<div class="score s4"></div>
+			<div class="score s3"></div>
+			<div class="score s2"></div>
+			<div class="score s1"></div>
+
+		</div>
+		<div  id="gm3" class="glassmask"></div>
+			<div id = "g3" class = "glassbox">
+			<div class="score s10"></div>
+			<div class="score s9"></div>
+			<div class="score s8"></div>
+			<div class="score s7"></div>
+			<div class="score s6"></div>
+			<div class="score s5"></div>
+			<div class="score s4"></div>
+			<div class="score s3"></div>
+			<div class="score s2"></div>
+			<div class="score s1"></div>
+		</div>
+
+	</div>
+
+</div>
+	
+	
+
+
+
+</body>
+</html>

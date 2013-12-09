@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <style type="text/css">
+    body{
+      margin:0px;
+    }
+    #list{
+      position: fixed;
+      top:0px;
+      right:0px;
+      margin:0px;
+      padding-right: 20px;
+      border-left: 2px solid #111;
+      width: 550px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height:100%;
+
+    }
+    .wrapvideo{
+      word-wrap: break-word; 
+      word-break: normal;
+      width:100%;
+      padding-left: 5px;
+      margin-right: 20px;
+      border-bottom: 1px #345 dashed;
+      margin-bottom: 20px;
+
+
+    }
+    .wrapvideo img{
+      float: left;
+      margin:10px;
+      margin-top: 50px;
+      width: 150px;
+    }
+    .wrapinfo{
+      margin-left: 170px;
+      margin-bottom: 50px;
+    }
+
+
+    </style>
+  </head>
+  <body>
+
+    <div id="buttons">
+      <label> <input id="query" value='五月天' type="text"/><button id="search-button" disabled onclick="search()">Search</button></label>
+    </div>
+    <br>
+    <div id="search-container">
+    </div>
+
+    <div id="player"></div>
+    <div id="list">
+      完全沒有畫面
+    </div>
+
+
+    <script type="text/javascript">
+      function handleAPILoaded() {
+        gapi.client.setApiKey('AIzaSyBM0brmlmrGhlFPGA4Zmf0DVy-F03UZFzE');
+        gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
+      }
+
+      // Once the api loads call enable the search box.
+      function onYouTubeApiLoad() {
+        $('#search-button').attr('disabled', false);
+      }
+
+      // Search for a given string.
+      function search() {
+        var q = $('#query').val();
+        var request = gapi.client.youtube.search.list({
+          q: q,
+          part: 'snippet',
+          type: "video",
+          maxResults:"10",
+        });
+
+        request.execute(function(response) {
+          console.log(response);
+          injectContent(response)
+        // var str = JSON.stringify(response.result);
+        // $('#search-container').html('<pre>' + str + '</pre>');
+        });
+      }
+
+      //對回應作處理
+      function injectContent(data) {
+        $("#list").html("");
+        $.each(data.items,function(index,item) {
+          console.log(item);
+          var imgsrc = item.snippet.thumbnails.default.url;//圖片可選大中小  default medium high
+          var title = item.snippet.title;
+          var videoid = item.id.videoId;
+          var publish_time = item.snippet.publishedAt;//影片張貼時間
+          var description = item.snippet.description;
+          $("#list").append("<div class=\"wrapvideo\">"+
+            "<img value="+videoid+" src="+imgsrc+">"+
+            "<div class=\"wrapinfo\">"+
+            "<h3>"+title+"</h3>"+
+            "<h3>videoId:</h3>"+videoid+
+            "<h3>publishedAt:</h3> "+publish_time+
+            "<h3>description:</h3>"+description+
+            "</div>"+
+            "</div>");
+
+        });
+        $("#list img").click(function() {
+          console.log($(this).attr("value"));
+          
+          loadVideo($(this).attr("value"));
+        });
+
+
+      }
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleAPILoaded"></script>
+    <script>
+
+
+      var user_platform = window.clientInformation.platform;
+      var isMac = (user_platform.charAt(0)=='i');//是否為iOS系統
+      console.log(user_platform.charAt(0)+","+isMac);//test
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "http://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady(videoid) {
+        player = new YT.Player('player', {
+          height: '250',
+          width: '340',
+          videoId: "LPDuYoOvo0k",
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        //event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      var count = 0 ;//test
+      var pre_state = -2;//test
+      function onPlayerStateChange(event) {
+        count++;//test
+        $("#msg").append("count: "+count+" event: "+event.data +"<br>");//test
+
+
+        //如果是iOS的系統在點選撥放器之撥放時執行以下function
+        if(isMac&&pre_state==5&&event.data==-1){
+          location.replace(player.getVideoUrl());//開啟頁面
+          $("#msg").append("Rock Your YouTube Link!!!!<br>"+player.getVideoUrl()+"<br>");//test
+        }
+
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+        pre_state = event.data;//test
+      }
+      
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+      function loadVideo(videoid){
+        console.log("Load Video ID: "+videoid);//test
+        //player.loadVideoById(videoid,"large");
+        player.cueVideoById(videoid,"large");//  (ID,預設影片品質)
+      }
+
+    </script>
+        <div id="msg"></div>
+
+        <script>
+
+
+    // var user_agent = window.clientInformation.platform;
+     $("#msg").text(isMac);//test
+     </script>
+  </body>
+
+</html>

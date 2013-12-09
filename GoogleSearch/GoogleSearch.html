@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <style type="text/css">
+    body{
+      margin:0px;
+    }
+ 
+    #msg{
+      background: #FBD70D;
+    }
+
+    .sendurl{
+      float:left;
+
+    }
+
+    .gsc-webResult .gsc-result{
+      right: 50px;
+
+    }
+
+    input.gsc-search-button{
+      display:none;
+    }
+    #webimg{
+      float: right;
+      margin-right: 30px;
+      width:200px;
+      border: 2px solid #111;
+      overflow-y:scroll;
+    }
+
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+  </head>
+  <body>
+<script>
+  (
+
+
+    function() {
+      var cx = '015454811591347015826:xn54hluzw6i';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+          '//www.google.com/cse/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    }
+  )();
+  setTimeout(function() {
+    console.log("click function");
+      $("input.gsc-search-button").show();
+      $("input.gsc-search-button").click(function() {
+    console.log("!!!!!!!!!!");
+    setTimeout(function() {
+      $(".gsc-webResult .gsc-result").before("<img class=sendurl src=http://pic.pimg.tw/izaka/1326207276-1495979332.png>");
+      $(".gsc-webResult .gsc-result .gs-webResult.gs-result ").css("margin-left","50px");
+      $(".sendurl").click(function() {
+        var title = $(this).next().find(".gsc-thumbnail-inside a").html();
+        var url = $(this).next().find(".gsc-thumbnail-inside a").attr("href");
+        $("#webimg").attr("src","http://192.168.1.46:8080/WebCatch/webcatch?url="+url)
+        $("#msg").prepend("TITLE: "+title+"<br>URL: "+url+"<br>--------------------<br>");
+      });
+
+  },3000);
+  });
+
+  },3000);
+
+</script>
+<div>
+<div class="sidebar">
+  Area 1 (for example a sidebar)
+  <gcse:searchbox></gcse:searchbox>
+</div>
+
+<div class="main-content">
+  <gcse:searchresults></gcse:searchresults>
+</div>
+<img id="webimg"></img>
+</div>
+
+
+<div id="msg"></div>
+
+</body>
+
+</html>

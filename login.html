@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css">
+#div1, #div2
+{float:left; width:100px; height:35px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
+
+#login{
+position: relative;
+width:300px; 
+height:35px; 
+padding:10px;
+background: #F92D2D;
+color:#fff;
+border:3px solid #111;
+border-radius: 7px;
+text-align: center;
+/*line-height: 35px;*/
+margin:auto;
+box-shadow: 0px 4px 3px rgba(20%,20%,40%,0.5);
+top:300px;
+}
+
+#login:hover{
+background: #DE2105;
+}
+#login:active{
+top:304px;
+box-shadow:none;
+}
+
+
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+
+<div id="login" onclick="location.href='http://localhost:8080/OtisOauth2Provider/auth?client_id=otisclient&redirect_uri=http://localhost:8080/OtisOauth2Provider/&response_type=code';"><div>LOGIN</div> HDtech Education Center</div>
+
+</body>
+</html>

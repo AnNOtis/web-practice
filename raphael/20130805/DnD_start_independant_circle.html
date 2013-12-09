@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style type="text/css">
+  body {
+    background: #444;
+    
+  }
+  </style>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="raphael-min.js"></script>
+  <script type="text/javascript">
+  $().ready(
+    function() {
+
+      canvas = Raphael("background-canvas",500,500);
+      var circle =  canvas.circle(250,250,30).attr({fill:"#945"}),
+      attr_when_drag= {opacity:"0.5",r:"50"},
+      attr_init = {opacity:"1",r:'30'};
+      ;
+
+      function startDrag() {
+        this.animate(attr_when_drag,500,"elastic");
+        this.ox = 0;
+        this.oy = 0;
+
+      };
+      function move(dx, dy) {
+        var trans_x = dx-this.ox;
+        var trans_y = dy-this.oy;
+        this.translate(trans_x,trans_y);
+        this.ox = dx;
+        this.oy = dy;
+        $("#trans_x").html("transX="+trans_x);
+        $("#trans_y").html("transY="+trans_y);
+        $("#ox").html("ox="+this.ox);
+         $("#oy").html("oy="+this.oy);
+
+
+      };
+      function drop() {
+
+        this.animate(attr_init,300,">");
+
+      };
+
+      circle.drag(move,startDrag,drop);
+
+
+
+
+
+    }
+
+
+
+
+    );
+  </script>
+
+</head>
+<body>
+  <div id="background-canvas"></div>
+  <div id="trans_x"></div>
+  <div id="trans_y"></div>
+  <div id="ox"></div>
+  <div id="oy"></div>
+  
+  <script type="text/javascript">
+
+  </script>
+
+
+</body>
+</html>

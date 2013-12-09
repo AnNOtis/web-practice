@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body{
+
+	margin:0px;
+	background:#345;
+	width: 100%;
+	height: 1000px;
+overflow: hidden;
+background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), 
+-webkit-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), 
+-webkit-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+}
+.wrap{
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	-webkit-perspective: 14000px;
+}
+
+.stage{
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-transform-origin: 50% 50%;
+	-webkit-animation: rotate-cube 4s  linear  infinite;
+}
+@-webkit-keyframes rotate-cube {
+		0% {
+	        -webkit-transform: rotateY(0Deg);
+		}
+		15%{
+			-webkit-transform: rotateY(180Deg);
+		}
+		50%
+		{
+			-webkit-transform: rotateY(180Deg);
+		}
+		65%{
+			-webkit-transform: rotateY(360Deg);
+		}
+		100%{
+			-webkit-transform: rotateY(360Deg);
+		}
+}
+
+.face{
+	height:300px;
+	width: 200px;
+	position: absolute;
+	-webkit-transform-origin: 50% 50%;
+
+	margin-left: -100px;
+	margin-top: -100px;
+	text-align: center;
+	font-size: 60px;
+	line-height:300px; 
+	box-shadow: 0px 0px 50px 0px rgba(255,255,255,0.3);
+
+}
+#cardfront{
+	background-color: #EE6363;
+	-webkit-transform:translateZ(1px) translateX(0px) rotateY(0deg);
+	z-index: 2;
+}
+
+#cardback{
+	background-color: #FFA500;
+	-webkit-transform:translateZ(-1px) translateX(0px) rotateY(180deg);
+}
+
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="jquery-firefly-0.2.js"> </script>
+<script type="text/javascript">
+$(document).ready(
+function() {
+
+$.firefly({
+		     images : ['fly2.png', '02.png'], //You can change images
+		     total : 65, // You can edit the number of flies
+		     on:"body"
+		 });
+
+
+}
+);
+
+</script>
+</head>
+<body>
+
+<div class="wrap">
+<div class="stage">
+<div class="face" id="cardfront">
+	Front
+</div>
+<div class="face" id="cardback">
+	Back
+</div>
+</div>
+
+</div>
+
+
+</body>
+</html>

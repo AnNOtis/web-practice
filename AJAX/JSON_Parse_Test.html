@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>getJSONparse</title>
+	<style>
+
+	ul{
+		background: #345;
+		border: #111 1px solid;
+
+
+	}
+	.noneitem{
+		width: 95%;
+		text-align: center;
+	}
+
+	.number{
+		width: 10%;
+	}
+
+	.title{
+		width: 50%;
+	}
+	.tag{
+		width: 10%;
+	}
+	.date{
+		width: 20%;
+	}
+	ul li div {
+		float: left;
+
+		margin: auto 0px;
+	}
+
+
+	</style>
+	<script src="jquery.js"></script>
+
+</head>
+<body>
+
+	<div id="msg">TEST Field</div>
+
+
+<!-- 	<ul>
+	<div class="log_date_field">2013.08.19</div>
+	<br>
+	<li class="tit">
+		<div class="number">no</div>
+		<div class="title">交代事項</div>
+		<div class="tag">類別</div>
+		<div class="date">截止日期</div>
+	</li>
+	<li >
+		<div class="number"></div>
+		<div class="title"></div>
+	</li>
+</ul>  -->
+
+
+<script>
+var contactbookItemPattern_ul = "<ul><div class=\"log_date_field\">2013.08.19</div><br>"+
+"<li class=\"tit\"><div class=\"number\">no</div><div class=\"title\">交代事項</div><div class=\"tag\">類別</div><div class=\"date\">截止日期</div>"+
+"</li>"+
+"</ul> ";
+var contactbookItemPattern_li = 
+"<li >"+
+"<div class=\"number\"></div>"+
+"<div class=\"title\"></div>"+
+"</li>";
+var count = 0 ;
+$.ajax({
+	url: 'http://192.168.1.46:8080/UI/service/contactbook/getContactBooks/SCE-hdt01',
+	type: 'GET',
+	contentType:"application/json; charset=UTF-8",
+	data: {
+
+	},
+	error: function(xhr) {
+		console.log(xhr);
+		alert('Ajax request 發生錯誤');
+	},
+	success: function(response) {
+
+		$.each(response["contactBookList"],function(entryIndex,entry) {
+			if(entry["updateTime"]=="2012-12-05 09:23:55"){
+				console.log("351sa65sdf4sdf35");
+			}else{
+
+
+			var items_entry = entry["items"];
+						//var items_entry_size = entry["items"].length;
+						if(items_entry!=null){
+
+							if(items_entry[0]==null&&items_entry["content"]!=null){
+								var $_temp_last_ul = $("#msg").append(contactbookItemPattern_ul).find("ul:last");
+
+								$_temp_last_ul.find(".log_date_field").html(entry["title"]);
+								var temp_item_count = 1 ;
+								$_temp_last_ul.find("li:last").after(contactbookItemPattern_li);
+								$_temp_last_ul.find("li:last .number").html(temp_item_count);
+								$_temp_last_ul.find("li:last .title").text($(items_entry["content"]).text());
+									//console.log("item: "+item_entry["items"]["content"]);
+									
+
+								}else{
+									var $_temp_last_ul = $("#msg").append(contactbookItemPattern_ul).find("ul:last");
+
+									$_temp_last_ul.find(".log_date_field").html(entry["title"]);
+									var temp_item_count = 1 ;
+									$.each(items_entry,function(item_entryIndex,item_entry) {
+										console.log(item_entry["content"]);
+										if(item_entry["content"]!=null)
+										{	
+
+											$_temp_last_ul.find("li:last").after(contactbookItemPattern_li);
+											$_temp_last_ul.find("li:last .number").html(temp_item_count);
+											$_temp_last_ul.find("li:last .title").text($(item_entry["content"]).text());
+									//console.log("item: "+item_entry["items"]["content"]);
+									temp_item_count++;
+								}
+							});
+
+								}
+							}
+						}
+						});
+
+}
+});
+
+</script>
+
+
+
+</body>
+</html>

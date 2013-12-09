@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+	<style type="text/css">
+	body{
+		cursor: pointer;
+		-moz-user-select: none;
+		-khtml-user-select: none;
+		-webkit-user-select: none;
+		user-select: none;
+
+	}
+	#clear-btn{
+		border: #111 1px solid;
+		width: 70px;
+	}
+
+	#clear-btn:hover{
+		border: #111 3px solid;
+	}
+
+
+	#colorpicker{
+		height: 60px;
+
+
+	}
+
+	#colorpicker div{
+		float:left;
+		margin: 5px;
+		width: 16px;
+		height: 16px;
+
+	}
+
+	.selected{
+		border: #222 2px solid;
+
+
+	}
+
+	#red-paint{
+		background: #CD5555;
+
+	}
+	#green-paint{
+		background: #00CD00;
+
+	}
+
+	#blue-paint{
+		background: #79CDCD;
+
+	}
+	#eraser{
+		background: #FFF;
+
+
+	}
+	
+	.content{
+		position: relative;
+
+
+	}
+
+	#paper{
+		position: relative;
+		background: #fff;
+		width: 500px;
+		height: 400px;
+		border: #111 3px solid;
+		cursor: pointer;
+
+
+	}
+
+	#paper:active{
+
+		cursor: pointer;
+	}
+	#msg{
+		position: absolute;
+		top:10px;
+		left: 20px;
+		color: #FFDE20;
+		background: #111;
+		border-radius: 5px;
+		padding-left: 5px;
+		padding-right: 5px;
+
+	}
+
+
+	</style>
+	<script type="text/javascript" src="raphael-min.js"></script>
+	<script type="text/javascript" src="../jquery.js"></script>
+	<script type="text/javascript">
+
+	$().ready(init);
+	function init() {
+		var isdown = false;
+		var temppath = "";
+		var nowColor = "#CD5555";
+		var attr = {stroke:nowColor,"stroke-width":8, "opacity": 0.8};
+		var paper = Raphael('paper',500,400);
+		var path_obj = [];
+		var pre_object = false;
+		var PAINT_MODE = "paint";//paint eraser
+
+		function redraw() {
+			paper.clear();
+			for(var i=0;i<path_obj.length;i=i+2){
+				paper.path(path_obj[i]).attr(path_obj[i+1]).toFront();
+			}
+
+		};
+
+
+		function clear_draw(nowpath) {
+			console.log("clear_draw!");
+			if(pre_object){
+				paper.clear();
+			}
+			for(var i=0;i<path_obj.length;i=i+2){
+				paper.path(path_obj[i]).attr(path_obj[i+1]).toFront();
+			}
+			var	now_object = paper.path(nowpath).attr(attr).toFront();;
+			pre_object = now_object;
+		};
+
+
+		function clear_pushpath_draw(nowpath) {
+			paper.clear();
+			path_obj.push(nowpath);
+			path_obj.push(attr);
+			for(var i=0;i<path_obj.length;i=i+2){
+				paper.path(path_obj[i]).attr(path_obj[i+1]).toFront();
+			}
+		};
+
+
+
+		$('#paper').mousedown(
+			function(e){
+				
+				isdown=true;
+				if(PAINT_MODE=="eraser"){
+					console.log(PAINT_MODE+"!!!");
+					var select_item = paper.getElementByPoint(e.pageX, e.pageY);
+					console.log(select_item);
+					if(select_item){
+						for(var i=0;i<path_obj.length;i=i+2){					
+							console.log("select_id: "+select_item.attr("path"));
+							console.log("path_obj[i].id: "+path_obj[i]);
+							if(path_obj[i] == select_item.attr("path")){
+								console.log("SPLICE!!!!!");
+								path_obj.splice(i,2);
+								redraw();
+								$('#msg').html("OBJECT_NUM: "+(path_obj.length/2));
+							}
+
+						}
+
+
+					}
+
+
+				}else{
+					temppath=(temppath+"M"+e.pageX+","+e.pageY);
+					console.log(e.pageX+"");
+					$('#msg').html("OBJECT_NUM: "+(path_obj.length/2+1));
+				}
+
+
+				
+				
+				//~~~~~~~~~~~~~~~選取界線~~~~~~~~~~~~~~~~~~~
+// var bbox = paper.getElementByPoint(e.pageX, e.pageY).attr({stroke: "#666"}).getBBox(true);
+// paper.rect(bbox.x,bbox.y,bbox.width,bbox.height).attr({fill:"none",stroke:"#984"});
+}
+);
+var ismove = false;
+$('#paper').mousemove(
+
+	function(e){
+		
+		if( isdown==true ){
+			ismove = true;
+			console.log("move Finc");
+			if(PAINT_MODE=="eraser"){
+				var select_item = paper.getElementByPoint(e.pageX, e.pageY);
+				console.log(select_item);
+				if(select_item){
+					for(var i=0;i<path_obj.length;i=i+2){					
+						console.log("select_id: "+select_item.attr("path"));
+						console.log("path_obj[i].id: "+path_obj[i]);
+						if(path_obj[i] == select_item.attr("path")){
+							console.log("SPLICE!!!!!");
+							path_obj.splice(i,2);
+							redraw();
+							$('#msg').html("OBJECT_NUM: "+(path_obj.length/2));
+						}
+					}
+				}
+			}else{
+				temppath=(temppath+"L"+e.pageX+","+e.pageY);
+				clear_draw(temppath);
+
+			}
+
+
+		}}
+		);
+$('#paper').mouseup(
+	function(e){
+		isdown=false;
+		if(ismove==true){
+			console.log("NOWW!!!!!");
+			if(PAINT_MODE=="eraser"){
+				console.log(PAINT_MODE+"!!!");
+
+			}else{
+				temppath=(temppath+"L"+e.pageX+","+e.pageY);
+				clear_pushpath_draw(temppath);
+				temppath="";
+
+			}
+		}
+
+		ismove = false;
+		$('#msg').html("OBJECT_NUM: "+path_obj.length/2);
+	}
+
+	);
+$('#colorpicker div').click(
+	function() {
+		$('#colorpicker div').removeClass('selected');
+		$(this).addClass('selected');
+
+		console.log(this.id);
+		if(this.id == "eraser"){
+			PAINT_MODE = "eraser";
+		}else{
+
+			nowColor = $(this).css("background-color");
+
+			attr = {stroke:nowColor,"stroke-width":8, "opacity": 0.8};
+			PAINT_MODE = "paint";
+
+		}
+
+
+	}
+	);
+
+$('#clear-btn').click(
+	function() {
+		paper.clear();
+		path_obj=[];
+		$('#msg').html("OBJECT_NUM: "+(path_obj.length/2));
+	}
+	);
+};
+
+
+
+
+
+
+</script>
+
+</head>
+<body>
+	
+	<div id="paper"></div>
+	<div id="colorpicker">
+		<div id="red-paint" class="selected"></div>
+		<div id="blue-paint">  </div>
+		<div id="green-paint">  </div>
+		<div id="eraser">X</div>
+	</div>
+	<div id="msg">OBJECT_NUM:</div>
+	<div id='clear-btn'>CLEAR!!<div>
+		
+
+
+	</body>
+	</html>

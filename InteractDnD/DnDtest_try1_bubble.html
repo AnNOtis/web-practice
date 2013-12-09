@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bubble</title>
+	<style>
+	.wrap{
+		width: 700px;
+		margin: 0 auto;
+		
+	}
+	.question .question-block {
+		box-shadow: inset 0px 0px 20px rgba(2, 2, 2, 0.7);
+		float: left;
+		margin: 10px;
+		border: 1px #111 solid;
+		background: #737959;
+		border-radius: 5px;
+		width: 150px;
+		height: 150px;
+		text-align: center;
+		line-height: 150px;
+		font-size: 25px;
+		text-transform:uppercase;
+		font-style: bold;
+	}
+
+
+
+	.answer .answer-block{
+		float:left;
+		margin:10px;
+		width: 150px;
+		height: 150px;
+		border-radius: 5px;
+		border: 1px #111 solid;
+		background: #fff;
+		text-align: center;
+	}
+	.answer .answer-block img{
+		
+		margin:auto;
+		width: 150px;
+		height: 150px;
+		border-radius: 5px;
+
+	}
+	.question{
+		display: inline-block;
+		margin: 50px 0px;
+	}
+	.answer{
+		display: inline-block;
+		margin: 50px 0px;
+	}
+
+	.clear{
+		width:0;
+		height:0;
+		clear:both;
+		visibility: hidden;
+	}
+
+
+	#showright{
+		position: absolute;
+		top:150px;
+		display: none;
+		width: 256px;
+		margin: 0 auto;
+	}
+	#showwrong{
+		position: absolute;
+		top:150px;
+		display: none;
+		width: 256px;
+		margin: 0 auto;
+	}
+
+/*氣泡訊息顯示*/
+	#comment {
+		display: none;
+	font-size: 20px;
+	width: 10em;
+	height: 1.7em;
+	background: #669DC9;
+	border-radius: 0.2em;
+	position: absolute;
+	text-align: center;
+	font-family: "Microsoft YaHei","Microsoft JhengHei";
+	}
+
+	#comment::before {
+		position:absolute;	
+		content: "";
+		bottom: -0.3em;
+		right: 1.6em;
+		width:0em;
+		height:0em;
+		border-bottom:0.4em solid transparent;
+		border-left:0.4em solid #669DC9;
+	}
+
+	</style>
+<script src="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+	<script>
+	$(function() {
+		var picturefile = ["cat","eagle","elephant","joke","lion","meerkat","owl","panda","polarbear","pongo","rabbit","zebra"];
+
+		var temp = picturefile[0];
+		picturefile[0] = picturefile[1];
+		picturefile[1] = temp;
+		
+		
+		//將題庫亂數
+		for(var i=0;i<12;i++){
+			var rand_switch_num = Math.floor(Math.random()*12);
+			console.log(rand_switch_num);
+
+			var temp = picturefile[i];
+			picturefile[i] = picturefile[rand_switch_num];
+			picturefile[rand_switch_num] = temp;
+		}
+
+		
+		//複製陣列並輸入題目
+		var question_array = new Array();
+		for(var i=0;i<=3;i++){
+			question_array[i] = picturefile[i];
+			$($(".question-block")[i]).attr("answer",question_array[i]).html(question_array[i]);
+		}
+
+		//亂數題目
+		for(var i=0;i<=3;i++){
+			var rand_switch_num = Math.floor(Math.random()*3);
+
+			var temp = question_array[i];
+		question_array[i] = question_array[rand_switch_num];
+		question_array[rand_switch_num] = temp;
+			//switchplace(question_array[i],question_array[rand_switch_num]);
+		}
+		
+		for(var i=0;i<=3;i++){
+			$($(".answer-block")[i]).attr("value",question_array[i]).find("img").attr("src","animals/"+question_array[i]+".jpg");
+		}
+
+
+	});
+
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="question">
+			<div class = "question-block" qid="1" q = "" answer=""></div>
+			<div class = "question-block" qid="2" q = "" answer=""></div>
+			<div class = "question-block" qid="3" q = "" answer=""></div>
+			<div class = "question-block" qid="4" q = "" answer=""></div>
+			<div class="clear"></div>
+		</div>
+		<div class="answer">
+			<div class = "answer-block" aid="1" value = "" ><img src="animals/cat.jpg" alt=""></div>
+			<div class = "answer-block" aid="2" value = ""><img src="animals/cat.jpg" alt=""></div>
+			<div class = "answer-block" aid="3" value = ""><img src="animals/cat.jpg" alt=""></div>
+			<div class = "answer-block" aid="4" value = ""><img src="animals/cat.jpg" alt=""></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div id="msg"></div>
+	<div id="showright"><img src="right.ico" ></div>
+	<div id="showwrong"><img src="wrong.ico" ></div>
+	<div id="comment"></div>
+		<audio 	id = "sound1" src="cheer.wav"></audio>
+		<audio  id = "sound2" src="oh.wav"></audio>
+<script>
+	$( ".question-block" ).droppable({
+      accept: ".answer-block",
+      activeClass: "drop-hover",
+      zIndex: 3,
+      drop: function( event, ui ) {
+
+      	
+      	var m_answer = ui.draggable.attr("value");
+      	var answer = $(this).attr("answer");
+
+      	console.log(m_answer);
+      	console.log(answer);
+
+      	if(m_answer==answer){
+      		showright();
+      		 ui.draggable( "option", "revert", false );
+      		// $(this).droppable( "disable" );
+      		ui.draggable( "disable" );
+      	}else{
+      		showwrong(ui.draggable);
+      	}
+      }
+    });
+ 
+	$(".answer-block").draggable({
+    	cursor: "move",
+    	snap:".question-block",
+    	snapMode: "inner",
+    	snapTolerance: 75,
+    	cursorAt: { top: 75, left: 75 },
+    	revert: true,
+    	zIndex: 100,
+    });
+
+	var wrong = 0;
+	function showright() {
+		var sound1 = document.getElementById("sound1");
+		wrong = 0;
+		$("#msg").text("Wrong Number:"+ wrong);
+		$("#comment").hide();
+			sound1.play();
+		$("#showright").show(100,function() {
+			console.log("!!!!!!!!!");
+			setTimeout(function() {
+				$("#showright").hide();
+			},500)
+		});
+
+	};	
+
+
+	
+	var error_info_rock = "系統將發送錯誤報告，告知家長老師您的答題狀況";
+	var error_info_final = "你只剩一次機會~(再答錯系統將會通知老師~)";
+	var error_info_normal = ["哈哈哈哈哈哈~遜斃了","其實你在睡覺對吧?","這題對你來說太難了!","你確定嗎?"];
+	var error_info_kind = ["我有這麼醜嗎?!?!","我比較可愛耶","我比較想住隔壁~~","加油!你可以答對的","Q__Q"];
+	var error_info = "你需要再認真點!!";
+		function showwrong(wrongobject) {
+			wrong++;
+			$("#msg").text("Wrong Number:"+ wrong);
+			var sound2 = document.getElementById("sound2");
+			sound2.play();
+			var wrong_pos = $(wrongobject).offset();
+			
+			console.log("!!:"+wrong_pos.top+","+wrong_pos.left);
+
+		if(wrong>=11){
+			alert(error_info_rock+"\n\n答錯次數:"+wrong);
+		}else if(wrong>=10){
+			alert(error_info_final+"\n目前答錯次數:"+wrong);
+		}else if(wrong>=6){
+			var temp_error_info = error_info_normal[Math.floor(Math.random()*(error_info_normal.length))];
+			showBubble(wrong_pos.top,wrong_pos.left,temp_error_info);
+		}else if(wrong >=3){
+			var temp_error_info = error_info_kind[Math.floor(Math.random()*(error_info_kind.length))];
+			showBubble(wrong_pos.top,wrong_pos.left,temp_error_info);
+		}else if(wrong >=2){
+			showBubble(wrong_pos.top,wrong_pos.left,error_info);
+		}else{
+		
+		}
+
+		$("#showwrong").show(100,function() {
+			setTimeout(function() {
+				$("#showwrong").hide();
+			},500)});
+		
+
+	};
+
+var hide_count = 20;
+var timer;
+	function showBubble(x,y,text) {
+		
+		$("#comment").text(text).css({"top":(x-50),"left":y});
+		$("#comment").show();
+		hide_count =20;
+
+		if(timer == null){
+			timer = setInterval(function() {
+			hide_count--;
+			if(hide_count==0){
+				$("#comment").hide();
+			}
+			
+		},100);
+		}
+		
+		
+			
+
+	};
+
+
+
+
+
+</script>
+	
+</body>
+</html>

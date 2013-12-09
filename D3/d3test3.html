@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body{
+
+	margin:0px;
+
+}
+.btn{
+	margin:5px;
+	box-sizing:border-box;
+	height:30px;
+	width: 80px;
+	text-align: center;
+	border: 2px solid #777;
+	vertical-align:middle;
+
+}
+.btn:hover{
+	border:2px solid #111;
+}
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+	var p
+	function function1() {
+		// Update…
+		var w = "500px";
+		var h = "500px";
+		var svg = d3.select("p").append("svg")
+		.attr("width",w)
+		.attr("height",h);
+
+		svg.selectAll("circle")
+		.data([35,57,112,293])
+		.enter()
+		.append("circle")
+		.attr("cy",90)
+		.attr("cx",function(d,i) { return i*80+50})
+		.attr("r",30)
+		.transition()
+		.delay(1000)
+		.duration(1000)
+		.attr("cy",90)
+		.attr("cx",String)
+		.attr("r",Math.sqrt);
+		    
+	}
+
+
+
+</script>
+</head>
+<body>
+<p>我是段落一</p>
+<p>我是段落二</p>
+<p>我是段落三</p>
+<div id="btn1" class="btn">Funtion1 |</div>
+<svg></svg>
+
+
+
+
+<script type="text/javascript">
+	$("#btn1").click(function1);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WebCatchTest</title>
+	<style type="text/css">
+	#imgbox{
+		position: relative;
+		top: 100px;
+		left:200px;
+	}
+
+
+	#loading-img{
+		width: 200px;
+		height:200px;
+
+	}
+
+	#catch-img{
+		display: none;
+
+
+	}
+
+
+	</style>
+	<script src="jquery.js"></script>
+	<script src="json2.js"></script>
+	<script>
+
+
+
+
+
+
+	$(function() {
+
+		var inputurl = $("#url").val();
+		console.log(inputurl);
+		var inputmode = $("#mode").val();
+		console.log(mode);
+		$.ajax({ 
+			type: 'GET',
+			dataType: 'image/png',
+			url: 'http://192.168.1.46:8080/WebCatch/webcatch',
+			data: {"url":inputurl,"mode":inputmode},
+			success: function (bytes) { 
+			    // $('#loadingAnimation').fadeOut('slow', function() { $('#reportNodeView').fadeIn('slow'); });
+			    $('#catch-img').attr('src', 'data:image/png;base64,' + bytes);
+			   
+			}
+		});
+	
+	});
+
+	</script>
+</head>
+<body>
+	<p>WebCatchUrl: <input id="url" type="text" value = "http://www.google.com"/></p>
+  	<p>Mode: <input id = "mode" type="text" value = "M" /></p>
+  	<button>Send</button>
+  	<br>
+	<div id="requestMsg">requestMsg</div>
+
+	<div id = "imgbox">
+	    <img id = "loading-img"src="loading.gif">
+	    <img id="catch-img" src=""></img>
+	</div>
+
+</body>
+</html>

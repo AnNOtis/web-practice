@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{
+		margin: 0px;
+		font-family:"Microsoft YaHei","Microsoft JhengHei";
+	}
+
+	#bander{
+		position: fixed;
+		height:230px;
+		width: 100%;
+		top:200px;
+		background: #4A0000;
+	}
+	.line{
+		position: absolute;
+		background: #fff;
+		width: 100px;
+		height: 5px;
+		z-index: 2;
+		box-shadow: -500px 0px 1px #fff, -300px 115px 1px #fff ,-800px 115px 1px #fff ; 
+	}
+
+
+	#wrap{
+		position: absolute;
+		height:230px;
+		width: 100%;
+		top: 0px;
+		border-top:4px solid #111;
+		border-bottom: 4px solid #111; 
+		background:-webkit-linear-gradient(left, #00475E, #007276);
+		z-index: 1;
+
+	}
+	#m1{
+		top: 10px;
+		
+		-webkit-animation: meteoshift 1.2s linear normal infinite;
+	}
+
+	#m2{
+		top: 20px;
+		-webkit-animation: meteoshift 0.8s linear normal infinite;
+	}
+
+	#m3{
+		top: 30px;
+		-webkit-animation: meteoshift 0.9s linear normal infinite;
+	}
+	#m4{
+		top: 40px;
+		-webkit-animation: meteoshift 1.0s linear normal infinite;
+	}
+
+	#m5{
+		top: 50px;
+		-webkit-animation: meteoshift 0.6s linear normal infinite;
+	}
+	#m6{
+		top: 60px;
+		-webkit-animation: meteoshift 0.9s linear normal infinite;
+	}
+
+	#m7{
+		top: 70px;
+		-webkit-animation: meteoshift 0.8s linear normal infinite;
+	}
+	#m8{
+		top: 80px;
+		-webkit-animation: meteoshift 1.2s linear normal infinite;
+	}
+	#m9{
+		top: 90px;
+		-webkit-animation: meteoshift 0.7s linear normal infinite;
+	}
+
+	#m10{
+		top: 100px;
+		-webkit-animation: meteoshift 1s linear normal infinite;
+	}
+	@-webkit-keyframes meteoshift /* Safari and Chrome */
+	{
+		from {left:0px; opacity:0.8;}
+		to {left:2100px; opacity:0.5;}
+	}
+
+	#img{
+		position: absolute;
+		top: -66px;
+		left: 5%;
+		z-index: 4;
+		transition: left 0.5s linear 1s;
+	}	
+	#img img{
+		height: 300px;
+	}
+ 
+	/*#img:hover{
+		left: 75%;
+	}*/
+
+
+	#bubble-wrap{
+		display: none;
+		position: absolute;
+		top: -30%;
+		left:51%;
+		z-index: 4;
+	}
+
+
+	#bubble {
+		
+		position: absolute;
+		font-size: 20px;
+		width: 15em;
+		height: 9em;
+		background: #FFFFFF;
+		border: 4px solid #2C2C2C;
+		border-radius: 0.2em;
+		top: 25%;
+		left:50%;
+		padding-left: 20px;
+		
+	}
+
+
+	#bubble-wrap::before {
+		position:absolute;	
+		content: "";
+		bottom: -14.3em;
+		right: -17.55em;
+		width:0em;
+		height:1em;
+		border-bottom:3em solid transparent;
+		border-right:3em solid #2C2C2C;	
+	}
+	#bubble-wrap::after {
+		position:absolute;	
+		content: "";
+		bottom: -13.7em;
+		right: -17.3em;
+		width:0em;
+		height:1em;
+		border-bottom:2.7em solid transparent;
+		border-right:2.7em solid #FFFFFF;	
+	}
+
+	
+
+
+	</style>
+	<style type="text/css">
+	/*打字機效果相關CSS*/
+	#ticker {
+		width: 500px;
+	}
+	#ticker .cursor {
+		display: inline-block;
+		background: red;
+		width: 17px;
+		height: 12px;
+		text-align: center;
+	}
+	#ticker p {
+		margin-bottom: 9px;
+	}
+</style>
+	<script src="jquery.js"></script>
+	<script type="text/javascript" src="jquery.jticker.js"></script>
+	<script type="text/javascript">
+	$(function() {
+
+		$("#img").css("left","75%");
+		setTimeout(function() {
+			$("#bubble-wrap").show();
+			$("#bubble").ticker({
+			cursorList: " _",
+			rate: 60, 
+			delay: 1000
+			}).trigger("play").trigger("stop");
+
+
+		},2000);
+
+
+
+
+
+	});
+
+
+
+	</script>
+</head>
+<body>
+	<div id="bander">
+		<div id="img"><img src="scream2.gif"></div>
+		<div id="bubble-wrap"><div id="bubble">
+			<div>
+					<h2>你太遜了!!</h2>
+					<p>你已經答錯了一百次~</p>
+					<p>太不應該了!!!!!!!!!!!!</p>
+				</div>
+		</div></div>
+		<div id="wrap">
+			<div class = "line" id="m1"></div>
+			<div class = "line" id="m2"></div>
+			<div class = "line" id="m3"></div>
+			<div class = "line" id="m4"></div>
+			<div class = "line" id="m5"></div>
+			<div class = "line" id="m6"></div>
+			<div class = "line" id="m7"></div>
+			<div class = "line" id="m8"></div>
+			<div class = "line" id="m9"></div>
+			<div class = "line" id="m10"></div>
+		</div>
+	</div>
+	
+
+	
+</body>
+</html>

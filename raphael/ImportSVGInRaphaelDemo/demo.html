@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style type="text/css">
+  body {
+    background-color: #fff;
+  }
+  </style>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="raphael-min.js"></script>
+  <script type="text/javascript" src="raphael-svg-import.min.js"></script>
+  <script type="text/javascript">
+  $().ready(function () {
+    // var paper = Raphael(10, 10, 500, 500);
+    // var newSet = paper.importSVG(document.getElementById('mysvg'));
+
+  });
+  </script>
+
+</head>
+<body>
+
+  
+<svg id="mysvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:html="http://www.w3.org/1999/xhtml" viewBox="0 0 1600 1000">
+  <defs>
+    <audio id="sound" xmlns="http://www.w3.org/1999/xhtml" src="oh.wav"></audio>
+  </defs>
+  
+  <rect xmlns="http://www.w3.org/2000/svg" width="400" height="86" rx="16" fill="url(#fill)" stroke="url(#stroke)" onclick="$('#test').append($('#sound').clone()).addClass('temp'); $('.temp audio').removeAttr('xmlns');$('.temp audio')[0].play()"/>
+
+</svg>
+
+<div id="test"></div>
+<script type="text/javascript">
+ 
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style type="text/css">
+  body {
+
+  overflow-x:hidden; 
+  }
+
+  [draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+  }
+
+  #canvas{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top:50px;
+    left: 200px;
+    
+    border: 1px solid #777;
+
+
+  }
+  article{
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+
+  }
+
+  aside{
+    background: #345;
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    margin-top: 0;
+    color:#FFD700;
+  }
+
+  aside ul li{
+    list-style:none;
+    min-width: 130px;
+    font-size: 30px;
+    background: #FFD700;
+    margin:10px;
+    color:#111;
+    border-radius: 5px;
+    padding: 3px;
+    cursor: move;
+  }
+
+  .dragtoraphael.over {
+    border: 2px dashed #000;
+  }
+  
+  #showbtn{
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    bottom: 0;
+    right: 0;
+    padding-top: 10px;
+    text-align: center;
+    border: 2px solid #111;
+    background: #FFD700;
+    z-index: 3;
+    -webkit-user-select: none;
+    cursor: pointer;
+  }
+
+  </style>
+  <script src="jquery.js"></script>
+  <script type="text/javascript" src="raphael-min.js"></script>
+
+
+</head>
+<body>
+
+  <article>
+    <div id="canvas" ondragover="dragoverHandler(event)"
+    ondrop="dropHandler(event)" ></div>
+
+    <div id="msg">msg</div>
+    <div id="msg2">msg2</div>
+    <div id="showbtn">►</div>
+
+  </article>
+
+  <aside><h2>日期提醒</h2>
+    <ul>
+      <li class="dragtoraphael" draggable = "true" ondragstart = "handleDragStart(event)">123</li>
+      <li class="dragtoraphael" draggable = "true" ondragstart = "handleDragStart(event)">223</li>
+      <li class="dragtoraphael" draggable = "true" ondragstart = "handleDragStart(event)">3YOYO</li>
+      <li class="dragtoraphael" draggable = "true" ondragstart = "handleDragStart(event)">4YAP</li>
+    </ul>
+
+
+
+  </aside>
+
+  <script type="text/javascript">
+  var navstate= 1;
+  $("#showbtn").click(function() {
+    if(navstate==1){
+      $("aside").animate({right:"-300"});
+      //$("aside").hide();
+      $("#showbtn").html("◄");
+      navstate = -(navstate);
+    }else if (navstate==-1){
+      $("aside").animate({right:"0"});
+      //$("aside").show();
+     $("#showbtn").html("►");
+      navstate = -(navstate);
+    }
+  });
+
+
+  var canvas = Raphael("canvas",500,500);
+  var base_color = 0.23;
+  var base_color_hsb = "hsb("+base_color+",1,1)";
+  var club_attr = {fill:base_color_hsb,opacity:1};
+  var club_hover_attr = {fill:base_color_hsb,opacity:1};
+  var club_height = 40;
+  var club_width = 160;
+
+
+  var c1 = canvas.rect(20,20,club_width,club_height).attr(club_attr);
+  var c2 = canvas.rect(20,80,club_width,club_height).attr(club_attr);
+  var c3 = canvas.rect(20,140,club_width,club_height).attr(club_attr);
+  var c4 = canvas.rect(20,200,club_width,club_height).attr(club_attr);
+  var st = canvas.set();
+  
+  st.push(
+    c1,c2,c3,c4
+    );
+    // st.hover(function() {
+    //   this.animate(club_hover_attr);
+    // },function() {
+    //   this.animate(club_attr);
+    // });
+
+
+
+function handleDragStart(e) {
+  e.currentTarget.style.opacity = "0.4";
+  e.dataTransfer.setData("title",e.currentTarget.textContent);
+  $("#msg2").html(e.currentTarget.textContent);
+}
+var pre_over_object_id;
+var count = 0;
+
+function dragoverHandler(event) {
+  event.preventDefault();
+  var now_object = canvas.getElementByPoint(event.pageX, event.pageY);
+
+  if(now_object!=null){
+
+    if(now_object.id != pre_over_object_id){
+
+      if(pre_over_object_id!=null){canvas.getById(pre_over_object_id).attr({fill:base_color_hsb});}
+      
+    }else{
+      now_object.attr({fill: "#f23"});
+    }
+
+
+    $("#msg").html("now:"+(now_object.id)+"<br>pre:"+(pre_over_object_id));
+
+    pre_over_object_id =now_object.id;
+  }
+}
+function dropHandler(event) {
+  event.preventDefault();
+  var did = event.dataTransfer.getData("title");
+  var now = canvas.getElementByPoint(event.pageX,event.pageY);
+  now.animate({fill: "#345"},500,function() { now.animate({fill: base_color_hsb},300)});
+  var text_x = now.attr("x")+club_width/2;
+  var text_y = now.attr("y")+club_height/2;
+  canvas.text(text_x,text_y,did).attr({"font-size":40,stroke:"#111",fill:"#FFD700"});
+
+    //c3.animate({fill:"#111"});      
+  }
+
+
+  </script>
+  <script type="text/javascript">
+
+
+
+</script>
+</body>
+</html>
+
+

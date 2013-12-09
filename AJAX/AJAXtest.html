@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js"></script>
+	<script src="json2.js"></script>
+	<script>
+	$(
+		
+		
+		function() {
+
+			var data =
+			{
+				"updatetime": "2013-08-18",
+				"note": "楊坤-空城",
+				"items": [
+				{
+					"number": 1,
+					"content": "helloJSON"
+				},
+				{
+					"number": 2,
+					"content": "123"
+				}
+				]
+			};
+			var datastr = JSON.stringify(data);
+// var data =
+// 			"{\"updatetime\": \"2013-08-18\",\"note\": \"楊坤-空城\",\"items\": [{\"number\": 1,\"content\": \"helloJSON\"},{\"number\": 2,\"content\": \"123\"}]}";
+
+			$.ajax({
+				url: 'http://192.168.1.46:8080/UI/service/contactbookconsole/test/',
+				type: 'GET',
+				contentType:"application/json; charset=UTF-8",
+				
+				data: {
+					"data": datastr,
+				},
+				error: function(xhr) {
+					console.log(xhr);
+					alert('Ajax request 發生錯誤');
+				},
+				success: function(response) {
+					console.log("res: "+response);
+					$('#msg').html(response);
+					
+
+				}
+			});
+
+console.log(datastr);
+
+
+
+		}
+		
+
+
+
+
+
+		);
+
+	</script>
+</head>
+<body>
+	<div id="msg">123</div>
+</body>
+</html>

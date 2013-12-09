@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body{
+
+	margin:0px;
+	background: #456;
+	background-image: -webkit-linear-gradient(top, #345, #555);
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height:5px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,255,255,0.4); 
+}
+.contain{
+	display: -webkit-flex;
+	-webkit-justify-content: flex-start;
+	-webkit-perspective: 5000px;
+}
+
+.flip-column{
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+	display: inline-block;
+	width: 200px;
+	transition:0.5s;
+	margin:10px;
+}
+
+.flip-column img{
+	width:200px;
+	margin-top: 10px;
+	box-shadow: 10px 10px 15px rgba(0,0,0,0.6);
+}
+
+
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+$().ready(
+function setSubmissionBoxControll() {
+	var win_width = parseFloat($(window).width());
+	var rotate_delta = 30;
+	var control_sense = 50;//靈敏度:邊界觸發控制距離
+	$("body").mouseenter(function(event) {
+
+
+	}).mousemove(function(event) {
+
+		if(event.pageX<=control_sense&&event.pageX>=0){
+			
+			$(".flip-column").css("-webkit-transform","rotateY("+rotate_delta+"deg)");
+
+
+		}else if(event.pageX>=(win_width-control_sense)&&event.pageX<=win_width+10){
+			$(".flip-column").css("-webkit-transform","rotateY("+(-rotate_delta)+"deg)");
+		}else{
+			$(".flip-column").css("-webkit-transform","rotateY("+(0)+"deg)");
+		}
+
+	});
+
+
+
+}
+
+
+);
+
+</script>
+</head>
+<body>
+
+<div class="contain">
+<div class="flip-column">
+<img src="img/img0.png">
+<img src="img/img1.png">
+<img src="img/img2.png">
+<img src="img/img3.png">
+<img src="img/img4.png">
+</div>
+<div class="flip-column">
+<img src="img/img5.png">
+<img src="img/img6.png">
+<img src="img/img7.png">
+
+</div>
+<div class="flip-column">
+<img src="img/img10.png">
+<img src="img/img11.png">
+<img src="img/img12.png">
+</div>
+<div class="flip-column">
+<img src="img/img15.png">
+<img src="img/img16.png">
+<img src="img/img17.png">
+
+</div>
+<div class="flip-column">
+<img src="img/img10.png">
+<img src="img/img11.png">
+<img src="img/img12.png">
+</div>
+<div class="flip-column">
+<img src="img/img13.png">
+<img src="img/img14.png">
+<img src="img/img8.png">
+<img src="img/img9.png">
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

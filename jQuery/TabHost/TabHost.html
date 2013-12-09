@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+
+<head>
+	<meta charset="UTF-8">
+	<style type="text/css">
+	#tabs li{
+		
+		border: 1px solid #111;
+		border-bottom: none;
+		display: inline-block;
+		margin-right: 5px;
+		padding: 5px 10px;
+		border-radius: 5px 5px 0 0;
+		color:#999;
+		cursor:pointer;
+
+	}
+	#login-user{
+		float: right;
+		margin: 10px;
+
+	}
+	.nothing-bg{
+		background: #96CDCD;
+
+	}
+	.chatroom-bg{
+		background: #FFC125;
+		
+	}
+	.board-bg{
+		background: #B3EE3A;
+		
+	}
+
+	#btn_board{
+
+		background: #B3EE3A;
+	}	
+	
+	#btn_chat{
+		background: #FFC125;
+
+	}	
+	#btn_none{
+
+		background: #96CDCD;
+	}	
+	.massage-block{
+		background: #CAFF70;
+		border: 1px solid #111; ;
+		border-radius: 5px;
+	}
+
+.massage-block .block-user{
+		
+		border-bottom: 1px dotted #111; ;
+		font-size:20px;
+		
+		font-style:italic;
+	}
+	.massage-block .block-content{
+		
+		font-size:14px;
+		padding-left: 60px;
+		font-style:normal;
+	}
+
+	#tabs{
+		margin-bottom: 0px;
+	}
+	#tabs li:hover{
+		color: #666;
+	}
+
+	#tabs li.selected{
+		border: 2px solid #333;
+		border-bottom: none;
+		margin-bottom: -1px;
+		color: #333;
+	}
+	#contents{
+		background: #ddd;
+		border: 1px solid #333;
+		box-shadow: 0 0 16px #ccc;
+	}
+	#contents div{
+		display: none;
+		text-align: justify;
+		padding: 3px 6px;
+	}
+	#contents  div:first-of-type{
+		display: block;
+	}
+	</style>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript">
+	$().ready(
+		function() {
+			$("#tabs li").each(
+				function(i) {var _i = i;
+					$(this).click(function() {
+
+						$(this).parent().children().removeClass("selected").eq(_i).addClass("selected");
+						$("#contents").children(".page").hide();
+						 $("#contents").children(".page").eq(_i).show();
+					});
+				}
+
+				);});
+	</script>
+</head>
+<body>
+
+	<ul id="tabs">
+		<li class="selected" id="btn_board">Board</li>
+		<li id="btn_chat">ChatRoom</li>
+		<li id="btn_none">Nothing</li>
+	</ul>
+
+	<div id="login-user">歡迎, Otis~</div>
+	<div id="contents">
+		<div class="board-bg page">
+			<div id = "massage-field">
+				<form action="">
+					<textarea>Input your masage</textarea>
+					<input type="submit" value="Enter">
+
+				</form>
+<div id="massage-list">
+				<div class="massage-block">
+					
+					<div class="block-content">
+<div class="block-user">Otis</div>
+						<p>Nothing Special!!<p></div>
+					
+
+				</div>
+
+			</div>
+
+
+			</div>
+			
+
+			<h2>出師表</h2>
+			書到用時方恨少<br>
+			好好研究出師表<br>
+			如果今天不背好<br>
+			明天分數會被笑<br>
+		</div>
+		<div class="chatroom-bg page">
+			<h2>木蘭詩</h2>
+			唧唧復唧唧<br>
+			木蘭當護士<br>
+			不聞雞往生<br>
+			願聞女嘆息<br>
+			問君荷索斯問君何所憶<br>
+			後面我忘記....<br>
+
+		</div>
+		<div class="nothing-bg page">
+			
+123123fasfsdfgsgse
+
+
+		</div>
+	</div>
+
+</body>
+</html>

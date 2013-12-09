@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tip with Shadow</title>
+	<style>
+	body{
+		background: #345;
+		overflow: hidden;
+		width: 100%;
+	}
+
+
+	.glow{
+
+		-webkit-box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);
+		-moz-box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);
+		box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);
+
+	}
+
+	@-webkit-keyframes shining
+	{
+	0% {box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .2);}
+	50% {box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .75);}
+	
+	100% {box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, .2);}
+	}
+
+
+	.crazy-glow{
+		
+		-webkit-animation: crazyglow 1s ;
+	}
+
+	@-webkit-keyframes crazyglow
+	{
+	0% {box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.7);}
+	60% {box-shadow: 0px 0px 15px 15px rgba(255, 255, 200,0.7);}
+	100% {box-shadow: 0px 0px 15px 15px rgba(255, 255, 200,0.7);}
+	
+	}
+
+	
+
+	#light-bulb	{ 
+		position:absolute; 
+		width:150px; 
+		height:150px; 
+		top:510px; 
+		left:115px; 
+		background:url(lightbulb.png) 
+		no-repeat -150px 0; 
+		cursor:move; 
+		z-index:800; }
+	#light-bulb2{ 
+		width:150px; 
+		height:150px; 
+		background:url(lightbulb.png) 
+		no-repeat 0 0; 
+		cursor:move;
+	}
+
+	.tiptool{
+		display: none;
+	}
+
+
+	#stupidmode{
+		position:fixed;
+		width:300px;
+		text-align: center;
+		bottom:30px;
+		right:30px;
+		margin:auto;
+		color:#CD5E0C;
+		display: none;
+		padding-top: 10px;
+		-webkit-animation: shining 1s infinite ;
+	}
+
+	#stupidmode h2{
+		color: #FCCB21;
+
+	}
+	.selected-item{
+		color:#FCCB21;
+	}
+
+	#switch { 
+		position:absolute; 
+		width:80px; 
+		height:120px; 
+		bottom:50px; 
+		left:50px; 
+		background:url(light-switch.png) no-repeat -80px 0; 
+		cursor:pointer; 
+		z-index:100; 
+	}
+
+	#answer-block-shadow { 
+		position:absolute; 
+		width: 1px;
+		height: 1px; 
+		top:40.5%; 
+		left: 29.5%;   
+		background: #111;
+		border-radius: 10px;
+		z-index:0;
+		opacity:0.7;
+		box-shadow:  0px 0px 15px 80px rgba(0, 0, 0, 0.8);
+	}
+
+
+
+
+	.wrap{
+		width: 700px;
+		margin: 0 auto;
+		/*overflow: none;*/
+	}
+	.question .question-block {
+		box-shadow: inset 0px 0px 20px rgba(2, 2, 2, 0.7);
+		float: left;
+		margin: 10px;
+		border: 1px #111 solid;
+		background: #737959;
+		border-radius: 5px;
+		width: 150px;
+		height: 150px;
+		text-align: center;
+		line-height: 150px;
+		font-size: 25px;
+		text-transform:uppercase;
+		font-style: bold;
+	}
+
+
+
+	.answer .answer-block{
+		float:left;
+		margin:10px;
+		width: 150px;
+		height: 150px;
+		border-radius: 5px;
+		border: 1px #111 solid;
+		background: #fff;
+		text-align: center;
+		z-index: 100;
+	}
+	.answer .answer-block img{
+		
+		margin:auto;
+		width: 150px;
+		height: 150px;
+		border-radius: 5px;
+		z-index: 101;
+	}
+	.question{
+		display: inline-block;
+		margin: 50px 0px;
+	}
+	.answer{
+		display: inline-block;
+		margin: 50px 0px;
+	}
+
+	.clear{
+		width:0;
+		height:0;
+		clear:both;
+		visibility: hidden;
+	}
+
+
+	#showright{
+		position: absolute;
+		top:150px;
+		display: none;
+		width: 256px;
+		margin: 0 auto;
+	}
+	#showwrong{
+		position: absolute;
+		top:150px;
+		display: none;
+		width: 256px;
+		margin: 0 auto;
+	}
+
+	
+
+	</style>
+<script src="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<script>
+	$(function() {
+
+		$("body").css({"width":screen.width,"height":screen.height});
+
+		var picturefile = ["cat","eagle","elephant","joke","lion","meerkat","owl","panda","polarbear","pongo","rabbit","zebra"];
+
+		var temp = picturefile[0];
+		picturefile[0] = picturefile[1];
+		picturefile[1] = temp;
+		
+		
+		//將題庫亂數
+		for(var i=0;i<12;i++){
+			var rand_switch_num = Math.floor(Math.random()*12);
+			console.log(rand_switch_num);
+
+			var temp = picturefile[i];
+		picturefile[i] = picturefile[rand_switch_num];
+		picturefile[rand_switch_num] = temp;
+		
+			//switchplace(picturefile[i],picturefile[rand_switch_num]);
+
+		}
+
+		
+		//複製陣列並輸入題目
+		var question_array = new Array();
+		for(var i=0;i<=3;i++){
+			question_array[i] = picturefile[i];
+			$($(".question-block")[i]).attr("answer",question_array[i]).html(question_array[i]);
+		}
+
+		//亂數題目
+		for(var i=0;i<=3;i++){
+			var rand_switch_num = Math.floor(Math.random()*3);
+
+			var temp = question_array[i];
+		question_array[i] = question_array[rand_switch_num];
+		question_array[rand_switch_num] = temp;
+			//switchplace(question_array[i],question_array[rand_switch_num]);
+		}
+		
+		for(var i=0;i<=3;i++){
+			$($(".answer-block")[i]).attr("value",question_array[i]).find("img").attr("src","animals/"+question_array[i]+".jpg");
+		}
+
+
+		
+
+		// function switchplace(a,b) {
+
+		// 	var temp =a;
+		// 	a=b;
+		// 	b=temp;
+
+
+		// };
+		
+
+
+	});
+
+	</script>
+</head>
+<body>
+	<audio 	id = "sound1" src="cheer.wav"></audio>
+	<audio  id = "sound2" src="oh.wav"></audio>
+	<audio  id = "sound3" src="goodjob.mp3"></audio>
+	<div id="msg">MSG</div>
+	<div id="stupidmode">I'm sorry. <h2>Run STUPID MODE!!</h2> </div>
+	<div id="switch" class="tiptool"></div>
+	<div id="light-bulb" class="off tiptool"><div id="light-bulb2" class="tiptool" ></div></div>
+	<div class="wrap">
+		<div class="question">
+			<div class = "question-block " qid="1" q = "" answer="123"></div>
+			<div class = "question-block" qid="2" q = "" answer="223"></div>
+			<div class = "question-block" qid="3" q = "" answer=""></div>
+			<div class = "question-block" qid="4" q = "" answer=""></div>
+			<div class="clear"></div>
+		</div>
+		<div class="answer">
+			<div class = "answer-block " aid="1" value = "" ><img src="animals/cat.jpg" alt=""></div>
+			<div id = "answer-block-shadow" class="tiptool"></div>
+			<div class = "answer-block" aid="2" value = ""><img src="animals/cat.jpg" alt=""></div>
+			<div class = "answer-block" aid="3" value = ""><img src="animals/cat.jpg" alt=""></div>
+			<div class = "answer-block" aid="4" value = ""><img src="animals/cat.jpg" alt=""></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	
+	<div id="showright"><img src="right.ico" ></div>
+	<div id="showwrong"><img src="wrong.ico" ></div>
+	
+	<script src="gen_shadow.js"></script>
+	
+</body>
+</html>

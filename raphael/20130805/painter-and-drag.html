@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style type="text/css">
+  body {
+    background: #888;
+    
+  }
+
+.wrap{
+  width: 700px;
+  height: 600px;
+  margin: auto;
+
+
+
+}
+
+#background-canvas{
+  float:left;
+  width: 500px;
+  height: 500px;
+  border: 2px #444 solid;
+   border-radius: 3px;
+margin: 5px;
+
+}
+
+
+#toolbar{
+  width: 70px;
+  height: 300px;
+  margin: 5px;
+    float:left;
+  border: 2px #444 solid;
+  border-radius: 5px;
+
+}
+
+
+
+
+#hand{
+  width: 50px;
+  background: #fff url("hand.png") 0 0 no-repeat;
+
+
+}
+
+
+#draw{
+
+
+
+}
+
+
+#toolbar div{
+
+    width: 16px;
+    height: 16px;
+    margin: 5px;
+}
+
+
+#colorpicker{
+    height: 60px;
+
+
+  }
+
+/*  #colorpicker div{
+    float:left;
+    margin: 5px;
+    width: 16px;
+    height: 16px;
+
+  }*/
+
+  .selected{
+    border: #222 2px solid;
+
+
+  }
+
+  #red-paint{
+    background: #CD5555;
+
+  }
+  #green-paint{
+    background: #00CD00;
+
+  }
+
+  #blue-paint{
+    background: #79CDCD;
+
+  }
+
+
+
+  </style>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="raphael-min.js"></script>
+  <script type="text/javascript">
+  $().ready(
+    function() {
+
+      canvas = Raphael("background-canvas",500,500);
+
+      attr_when_drag= {opacity:"0.5",r:"50"},
+      attr_init = {opacity:"1",r:'30'};
+      ;
+
+      function startDrag() {
+        this.animate(attr_when_drag,500,"elastic");
+        this.ox = 0;
+        this.oy = 0;
+
+      };
+      function move(dx, dy) {
+        var trans_x = dx-this.ox;
+        var trans_y = dy-this.oy;
+        this.translate(trans_x,trans_y);
+        this.ox = dx;
+        this.oy = dy;
+        $("#trans_x").html("transX="+trans_x);
+        $("#trans_y").html("transY="+trans_y);
+        $("#ox").html("ox="+this.ox);
+         $("#oy").html("oy="+this.oy);
+
+
+      };
+      function drop() {
+
+        this.animate(attr_init,300,">");
+
+      };
+
+
+
+    //   var isdown = false;
+    // var temppath = "";
+    // var nowColor = "#CD5555";
+    // var attr = {stroke:nowColor,"stroke-width":8, "opacity": 1};
+    // var paper = Raphael('paper',500,400);
+
+    // $('#paper').mousedown(
+    //   function(e){
+    //     isdown=true;
+    //     console.log(isdown);
+    //     paper.path(temppath=(temppath+"M"+e.pageX+" "+e.pageY)).attr(attr);
+    //     console.log(e.pageX+"");
+
+    //   }
+
+
+    //   );
+    // $('#paper').mousemove(
+
+    //   function(e){
+    //     if( isdown==true ){
+    //       console.log(isdown);
+    //       paper.path(temppath=(temppath+"L"+e.pageX+" "+e.pageY)).attr(attr);
+    //     }}
+    //     );
+    // $('#paper').mouseup(
+    //   function(e){
+    //     isdown=false;
+    //     console.log(isdown);
+    //     paper.path(temppath=(temppath+"L"+e.pageX+" "+e.pageY)).attr(attr);
+    //     temppath="";
+    //   }
+
+    //   );
+     
+
+
+
+
+
+    }
+
+
+
+
+    );
+  </script>
+
+</head>
+<body>
+  <div class="wrap">
+    
+<div id="background-canvas"></div>
+  <div id="toolbar">
+    
+<div id="hand"></div>
+<div id="draw"></div>
+<div id="colorpicker">
+    <div id="red-paint" class="selected"></div>
+    <div id="blue-paint">  </div>
+    <div id="green-paint">  </div>
+  </div>
+
+  <div id="clear">
+    
+
+
+
+  </div>
+
+
+
+  </div>
+
+  </div>
+  
+  <div id="trans_x"></div>
+  <div id="trans_y"></div>
+  <div id="ox"></div>
+  <div id="oy"></div>
+  
+  <script type="text/javascript">
+
+  </script>
+
+
+</body>
+</html>

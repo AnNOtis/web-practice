@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+<style type="text/css">
+body{
+
+	margin:0px;
+
+}
+.btn{
+	margin:5px;
+	box-sizing:border-box;
+	height:30px;
+	width: 80px;
+	text-align: center;
+	border: 2px solid #777;
+	vertical-align:middle;
+
+}
+.btn:hover{
+	border:2px solid #111;
+}
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+	function function1() {
+		d3.selectAll("p").style("background","red");
+	}
+
+	function function2() {
+		d3.selectAll("p").style("background",function() {
+		 	return "hsl(" + Math.random() * 360 + ",100%,50%)";
+		});
+	}
+
+	function function3() {
+		d3.selectAll("p").style("background",function(d,i) {
+			return i % 2 ? "#fff" : "#aaa";
+		});
+	}
+
+	function function4() {
+
+		d3.selectAll("p")
+	    .data([4, 8, 15, 16, 23, 42])
+	    .style("font-size", function(d) { return d + "px"; });
+
+	}
+
+
+</script>
+</head>
+<body>
+<p>我是段落一</p>
+<p>我是段落二</p>
+<p>我是段落三</p>
+
+<div id="btn1" class="btn">Funtion1 |</div>
+<div id="btn2" class="btn">Funtion2 |</div>
+<div id="btn3" class="btn">Funtion3 |</div>
+<div id="btn4" class="btn">Funtion4 |</div>
+
+<script type="text/javascript">
+	$("#btn1").click(function1);
+	$("#btn2").click(function2);
+	$("#btn3").click(function3);
+	$("#btn4").click(function4);
+</script>
+</body>
+</html>

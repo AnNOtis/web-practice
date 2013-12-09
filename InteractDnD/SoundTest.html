@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+		<h2>kindness</h2>
+		<audio controls	id = "sound1" src="kindness.mp3"></audio>
+		<audio controls id = "sound2" src="summer.mp3"></audio>
+
+		<button id = "btn1">play1</button>
+		<button id = "btn2">play2</button>
+		<script>
+		$("#btn1").click(function() {
+
+			var sound1 = document.getElementById("sound1");
+			sound1.play();
+		})
+		$("#btn2").click(function() {
+
+			var sound2 = document.getElementById("sound2");
+			sound2.play();
+		})
+
+		</script>
+</body>
+</html>

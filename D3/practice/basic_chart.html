@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Chart</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="../d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+<script type="text/javascript">
+var svgWidth = 400;
+var svgHeight = 300;
+var padding = 3;
+var dataset = [300,123,12,19,13,5,23,23,200,135,23,12,19,135,23,22,19,13];
+var scale = d3.scale.linear()
+				.domain([0,d3.max(dataset)])
+				.range([0,svgHeight]);
+var svg = d3.select("body")
+		.append("svg")
+		.attr({
+			"width": svgWidth,
+			"height": svgHeight,
+		})
+
+svg.selectAll("rect")
+.data(dataset)
+.enter()
+.append("rect")
+.attr("width",function(d) {
+	return svgWidth/dataset.length*0.8;
+})
+.attr("height",function(d) {
+	return scale(d);
+})
+.attr("x",function(d,index) {
+	return index*(svgWidth/dataset.length);
+})
+.attr("y",function(d) {
+	return svgHeight-scale(d);
+}).attr("fill",function() {
+
+});
+
+</script>
+</body>
+</html>

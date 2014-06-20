@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+	<title>HanbarPractice</title>
+	<style>
+	body{
+		margin:0px;
+	}
+	strong{
+		color:red;
+	}
+
+	.demo-block{
+		border-radius: 4px;
+		border: 2px solid #999;
+		padding:10px;
+		padding-top: 0px;
+		width:500px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.demo-block h3{
+		background:#ffffd0;
+
+	}
+	.demo-block .msg{
+		border-radius: 4px;
+		border: 2px solid #eee;
+		padding:10px;
+	}
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="handlebars.js"></script>
+</head>
+<body>
+	<script id="commom-template" type="text/x-handlebars-template">
+		<h3>{{name}}</h3>
+		<div class="msg">
+			{{content}}
+		</div>
+	</script>
+
+	<script id="html-template" type="text/x-handlebars-template">
+		<h3>{{name}}</h3>
+		<div class="msg">
+			{{{content}}}
+		</div>
+	</script>
+	
+	<script id="list-template" type="text/x-handlebars-template">
+		<h3>{{name}}</h3>
+		<div class="msg">
+			{{#list people}}{{firstName}} {{lastName}}{{/list}}
+		</div>
+	</script>
+
+
+	<script >
+	$(document).ready(function() {
+		Handlebars.registerHelper('list', function(items, options) {
+		  var out = "<ul>";
+		  for(var i=0, l=items.length; i<l; i++) {
+		    out = out + "<li>" + options.fn(items[i]) + "</li>";
+		  }
+		  return out + "</ul>";
+		});
+
+		var data = 
+		{
+			name:"Common", 
+			content:"測試Handlebar最基本款"
+		};
+		var source = $("#commom-template").html();
+		var template = Handlebars.compile(source);
+		var html = template(data);
+		$("#common").html(html);
+
+
+		var data = 
+		{
+			name:"Html", 
+			content:"測試Handlebar的內容具有html語法<strong>三個大括號</strong>"
+		};
+		var source = $("#html-template").html();
+		var template = Handlebars.compile(source);
+		var html = template(data);
+		$("#html").html(html);
+
+
+		var data = 
+		{
+			name:"List",
+			people: [
+				{firstName: "Yehuda", lastName: "Katz"},
+				{firstName: "Carl", lastName: "Lerche"},
+				{firstName: "Alan", lastName: "Johnson"}
+			]
+		}
+		var source = $("#list-template").html();
+		var template = Handlebars.compile(source);
+		var html = template(data);
+		$("#list").html(html);
+		
+	});
+		
+	</script>
+	
+	<div id="common" class="demo-block"> 
+		
+	</div>
+	<div id="html" class="demo-block"> 
+		
+	</div>
+	<div id="list" class="demo-block"> 
+		
+	</div>
+
+</body>
+</html>

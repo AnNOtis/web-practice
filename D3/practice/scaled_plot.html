@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Chart</title>
+	<style type="text/css">
+
+	.axis path,
+	.axis line{
+		fill:none;
+		stroke:black;
+		shape-rendering: crispEdges;
+	}
+
+	.axis text{
+		font-family: sans-serif;
+		font-size:11px;
+	}
+
+	#msg{
+		float:right;
+	}
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="../d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+<div id="msg">
+
+
+</div>	
+<button onclick="ChartWidget.refreshData()">重新整理</button>
+<script type="text/javascript">
+var ChartWidget = {};
+$().ready(function() {
+	ChartWidget.init();
+
+	// setInterval("ChartWidget.refreshData()", 1500);
+});
+
+	
+var dataset = [];
+var s;
+ChartWidget = {
+	settings: {
+		width: 800,
+		height: 400,
+		padding: 40,
+		point_number: 10,
+		svg:"",
+		plotXScale:"",
+		plotYScale:"",
+		hsl50Scale:"",
+		hsl100Scale:"",
+		hsl255Scale:""
+	},
+	init: function() {
+		s = ChartWidget.settings;
+		ChartWidget.initData();
+		ChartWidget.initSVG();
+		ChartWidget.initPlotXScale();
+		ChartWidget.initPlotYScale();
+		ChartWidget.initHSLScale();
+		ChartWidget.plot();
+		// ChartWidget.addLabel();
+		ChartWidget.addXAxis();
+		ChartWidget.addYAxis();
+	},
+	initData: function() {
+		
+		dataset = [];
+		for(var i=0;i<s.point_number;i++){
+			var x = Math.floor(Math.random()*300);
+			var y = Math.floor(Math.random()*300);
+			dataset.push([x,y]);
+		}
+		
+	},
+	initSVG: function() {
+		s.svg = d3.select("body")
+		.append("svg")
+		.attr({
+			"width": s.width,
+			"height": s.height,
+		})
+	},
+	initPlotXScale: function() {
+		s.plotXScale = d3.scale.linear()
+		.domain([0,d3.max(dataset,
+						function(d) {
+							return d[0];
+						})])
+				.range([s.padding,s.width-s.padding]);
+	},
+	initPlotYScale: function() {
+		s.plotYScale = d3.scale.linear()
+		.domain([0,d3.max(dataset,
+						function(d) {
+							return d[0];
+						})])
+				.range([s.height-s.padding,s.padding]);
+	},
+	initHSLScale: function() {
+		s.hsl50Scale = d3.scale.linear()
+						.domain([0,d3.max(dataset,function(d) {return d[1];})])
+						.range([0,50]);
+		s.hsl100Scale = d3.scale.linear()
+						.domain([0,d3.max(dataset,function(d) {return d[1];})])
+						.range([0,100]);
+		s.hsl255Scale = d3.scale.linear()
+						.domain([0,d3.max(dataset,function(d) {return d[0];})])
+						.range([0,255]);
+	},
+	plot: function() {
+		s.svg.selectAll("circle")
+		.data(dataset)
+		.enter()
+		.append("circle")
+		.attr("fill",function(d) {
+			return "hsl("+s.hsl255Scale(d[0])+",100%,"+s.hsl50Scale(d[1])+"%)";
+		})
+		.attr("cx",function(d) {
+			return s.plotXScale(d[0]);
+		})
+		.attr("cy",function(d) {
+			return s.plotYScale(d[1]);
+		})
+		.attr("r",function(d) {
+			return Math.sqrt(d[1])/2;
+		});
+		
+		
+	},
+	addLabel: function() {
+
+		s.svg.selectAll("text")
+		.data(dataset)
+		.enter()
+		.append("text")
+		.attr("x",function(d) {
+			return s.plotXScale(d[0]);
+		})
+		.attr("y",function(d) {
+			return s.plotYScale(d[1]);
+		})
+		.text(function(d) {return d[0]+", "+d[1]})
+		.attr("font-size","12px")
+		.attr("fill","black");
+	},
+	addXAxis: function() {
+		var xAxis = d3.svg.axis()
+		.scale(s.plotXScale)
+		.orient("bottom");
+
+		s.svg.append("g")
+		.attr("class","axis")
+		.attr("transform", "translate(0,"+(s.height-s.padding)+")")
+		.call(xAxis);
+	},
+	addYAxis: function() {
+		var yAxis = d3.svg.axis()
+		.scale(s.plotYScale)
+		.orient("left");
+
+		s.svg.append("g")
+		.attr("class","axis")
+		.attr("transform", "translate("+s.padding+",0)")
+		.call(yAxis);
+	},
+	refreshData: function() {
+		ChartWidget.initData();
+		$("#msg").empty();
+		$.each(dataset,function(index,value) {
+			$("#msg").append("<div>"+(index+1)+". ("+value[0]+","+value[1]+")</div>");
+		});
+		s.svg.selectAll("circle")
+		.data(dataset)
+		.transition().duration(1000)
+		.attr("fill",function(d) {
+			return "hsl("+s.hsl255Scale(d[0])+",100%,"+s.hsl50Scale(d[1])+"%)";
+		})
+		.attr("cx",function(d) {
+			return s.plotXScale(d[0]);
+		})
+		.attr("cy",function(d) {
+			return s.plotYScale(d[1]);
+		})
+		.attr("r",function(d) {
+			return Math.sqrt(d[1])/2;
+		});	
+
+		// s.svg.selectAll("text")
+		// .data(dataset)
+		// .transition().duration(1000)
+		// .attr("x",function(d) {
+		// 	return s.plotXScale(d[0]);
+		// })
+		// .attr("y",function(d) {
+		// 	return s.plotYScale(d[1]);
+		// })
+		// .text(function(d) {return d[0]+", "+d[1]})
+		// .attr("font-size","12px")
+		// .attr("fill","black");
+	}
+}
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

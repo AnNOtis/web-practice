@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FlowPlayer</title>
+	<!-- 1. skin -->
+	<link rel="stylesheet" href="http://releases.flowplayer.org/5.4.6/skin/minimalist.css">
+	 <style>
+	.player {
+   width: 600px;
+   height: 338px;
+}
+	 </style>
+	<!-- 2. jquery library -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	 
+	<!-- 3. flowplayer -->
+	<script src="http://releases.flowplayer.org/5.4.6/flowplayer.min.js"></script>
+</head>
+<body>
+	<div id="player" class="player">
+
+   </div>
+   <script>
+   $(function () { // ensure DOM is ready
+ 
+   // this will install flowplayer into an element with id="player"
+   $("#player").flowplayer({
+      // one video: a one-member playlist
+      playlist: [
+         // a list of type-url mappings in picking order
+         [
+            { mp4:  "http://stream.flowplayer.org/white/470x250.mp4" },
+         ]
+      ],
+      ratio: 3/4 // video with 4:3 aspect ratio
+   });
+ 
+});
+   </script>
+</div>
+</body>
+</html>

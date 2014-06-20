@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/howler.js"></script>
+	<style>
+	div{
+		width:200px;
+		height:50px;
+		border: 2px solid #111;
+		background: #fffef0;
+	}
+	div:hover{
+
+		background: #bbbeb0;
+	}
+	</style>
+	<script>
+	$().ready(function() {
+		var c_note = new Howl({
+	    	urls: ['c.mp3'],
+		});
+		var d_note = new Howl({
+	    	urls: ['d.mp3']
+		});
+		var e_note = new Howl({
+	    	urls: ['e.mp3']
+		});
+		var f_note = new Howl({
+	    	urls: ['f.mp3']
+		});
+		var g_note = new Howl({
+	    	urls: ['g.mp3']
+		});
+		var a_note = new Howl({
+	    	urls: ['a.mp3']
+		});
+		var b_note = new Howl({
+	    	urls: ['b.mp3']
+		});
+		var cu_note = new Howl({
+	    	urls: ['cu.mp3']
+		});
+		
+		$("div:eq(0)").mousedown(function() {
+			c_note.play();
+		});
+		$("div:eq(1)").mousedown(function() {
+			d_note.play();
+		});
+		$("div:eq(2)").mousedown(function() {
+			e_note.play();
+		});
+		$("div:eq(3)").mousedown(function() {
+			f_note.play();
+		});
+		$("div:eq(4)").mousedown(function() {
+			g_note.play();
+		});
+		$("div:eq(5)").mousedown(function() {
+			a_note.play();
+		});
+		$("div:eq(6)").mousedown(function() {
+			b_note.play();
+		});
+		$("div:eq(7)").mousedown(function() {
+			cu_note.play();
+		});
+
+		Howler.volume(0.5);
+	});
+
+	</script>
+</head>
+<body>
+	<a href="http://www.google.com"><div>C</div></a>
+	<div>D</div>
+	<div>E</div>
+	<div>F</div>
+	<div>G</div>
+	<div>A</div>
+	<div>B</div>
+	<div>C</div>
+</body>
+</html>
